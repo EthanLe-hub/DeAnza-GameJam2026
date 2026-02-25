@@ -12,51 +12,44 @@ public class BouquetManager : MonoBehaviour
 
     public List<BouquetSlot> bouquetSlots; // Assign 5 bouquet slots (Slot1, Slot2, etc.) in the Inspector. 
 
-    private List<FlowerData> currentBouquet = new List<FlowerData>(); // List to hold the bouquet being built (contains Flower Objects that were instantiated based on FlowerData.cs).
+    private FlowerData[] currentBouquet; // List to hold the bouquet being built (contains Flower Objects that were instantiated based on FlowerData.cs).
 
     private int selectedSlotIndex = -1; // For tracking which slot has been selected. 
+
+    void Start()
+    {
+        currentBouquet = new FlowerData[maxSlots]; // Initialize a fixed-size (static) array. 
+    }
 
     /** 
      * Function to add a Flower Object instance by FlowerData.cs into the current bouquet. 
     **/ 
     public void AddFlower(FlowerData flower) 
     {
-        // If a player selected a slot, replace it:
+        // If a player selected a slot, place/replace flower directly in that slot:
         if (selectedSlotIndex != -1)
         {
-            // If the player is replacing a clicked EXISTING slot with a different added flower:
-            if (selectedSlotIndex < currentBouquet.Count) 
-            {
-                currentBouquet[selectedSlotIndex] = flower; // then replace that existing slot. 
-            }
-
-            // Otherwise, if the player is adding a flower to a clicked EMPTY slot:
-            else if (currentBouquet.Count < maxSlots)
-            {
-                currentBouquet.Add(flower); // then add it to the next empty slot. 
-            }
+            currentBouquet[selectedSlotIndex] = flower;
 
             selectedSlotIndex = -1; // Set selected slot index back to default (return it where it came from). 
             
-            for (int i = 0; i < bouquetSlots.Count; i++) // Deactivate any glows after adding a flower. 
-            {
-                bouquetSlots[i].SetGlow(false); 
-            }
-            
-            UpdateSlotVisual(); 
+            ClearAllGlows(); // Call function to clear all slot glows from selection. 
+            UpdateSlotVisual(); // Update the bouquet visual to show updated slot after adding a flower.
             return; 
         }
 
-        // Check if the bouquet is full (already has 5 flowers):
-        if (currentBouquet.Count >= maxSlots) 
+        // Otherwise, find the first empty slot available in the current bouquet array. 
+        for (int i = 0; i < currentBouquet.Length; i++)
         {
-            Debug.Log("Bouquet is full! Remove one to add!"); 
-            return;
+            if (currentBouquet[i] == null)
+            {
+                currentBouquet[i] = flower; // Add new flower to next empty slot. 
+                UpdateSlotVisual(); // Update the bouquet visual to show updated slot after adding a flower.
+                return; 
+            }
         }
-
-        // Normal add behavior (if no slots were selected): 
-        currentBouquet.Add(flower); // Add new flower if bouquet is not full. 
-        UpdateSlotVisual(); // Update the bouquet visual to show new added flower. 
+        
+        Debug.Log("Bouquet is full! Remove one to add!"); 
     }
 
     /** 
@@ -64,8 +57,13 @@ public class BouquetManager : MonoBehaviour
     **/
     public void ClearBouquet()
     {
-        currentBouquet.Clear(); // Clear the whole bouquet to start afresh. 
-        UpdateSlotVisual(); // Update the bouquet visual to show empty after clearing List<FlowerData>. 
+        for (int i = 0; i < currentBouquet.Length; i++)
+        {
+            currentBouquet[i] = null; // Clear the whole bouquet to start afresh. 
+        }
+        
+        ClearAllGlows(); // Clear any glows that may be from any selected slots. 
+        UpdateSlotVisual(); // Update the bouquet visual to show empty after clearing currentBouquet[] array. 
     }
 
     /**
@@ -75,7 +73,7 @@ public class BouquetManager : MonoBehaviour
     {
         for (int i = 0; i < bouquetSlots.Count; i++) // Loop through each of the 5 bouquet slots, 
         {
-            if (i < currentBouquet.Count) // and add the visuals to the slots if the flower exists at that slot in the backend.
+            if (i < currentBouquet.Length) // and add the visuals to the slots if the flower exists at that slot in the backend.
             {
                 bouquetSlots[i].SetFlower(currentBouquet[i]); 
             } 
@@ -101,9 +99,20 @@ public class BouquetManager : MonoBehaviour
     }
 
     /**
+     * Function to clear all possible glows from any selected slots:
+    **/ 
+    void ClearAllGlows()
+    {
+        for (int i = 0; i < bouquetSlots.Count; i++)
+        {
+            bouquetSlots[i].SetGlow(false); 
+        }
+    }
+
+    /**
      * Function to return the current bouquet. 
     **/
-    public List<FlowerData> GetBouquet()
+    public FlowerData[] GetBouquet()
     {
         return currentBouquet; 
     }

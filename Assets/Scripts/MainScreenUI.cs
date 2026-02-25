@@ -13,6 +13,7 @@ public class MainScreenUI : MonoBehaviour
     [SerializeField] private Button credits; // Attach Button component via Inspector. 
 
     [Header("Main Screen GameObject panels:")]
+    [SerializeField] private GameObject mainMenuPanel; // Attach GameObject component via Inspector. 
     [SerializeField] private GameObject playPanel; // Attach GameObject component via Inspector. 
     [SerializeField] private GameObject settingsPanel; // Attach GameObject component via Inspector. 
     [SerializeField] private GameObject creditsPanel; // Attach GameObject component via Inspector. 
@@ -60,6 +61,10 @@ public class MainScreenUI : MonoBehaviour
     **/ 
     public void showPlayPanel()
     {
+        if (mainMenuPanel != null)
+        {
+            mainMenuPanel.SetActive(false); 
+        }
         if (playPanel != null) 
         {
             playPanel.SetActive(true); 

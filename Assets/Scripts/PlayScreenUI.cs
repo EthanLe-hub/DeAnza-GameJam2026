@@ -9,6 +9,7 @@ public class PlayScreenUI : MonoBehaviour
 {
     [Header("UI References:")]
     [SerializeField] private GameObject playPanel; // Assign GameObject component in Inspector. 
+    [SerializeField] private GameObject mainScreenPanel; // Assign GameObject component in Inspector. 
     [SerializeField] private Button closeButton; // Assign Button component in Inspector. 
 
     private void Awake()
@@ -22,8 +23,9 @@ public class PlayScreenUI : MonoBehaviour
     private void HidePanel()
     {
         if (playPanel != null)
-        {
+        { 
             playPanel.SetActive(false); // Turn off the Play panel when Close button is clicked. 
+            mainScreenPanel.SetActive(true); // Turn on main screen.
         }
     }
 }

@@ -296,6 +296,7 @@ PlayerSettings:
   androidSymbolsSizeThreshold: 800
   m_BuildTargetIcons: []
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_BuildTargetPlatformIcons:
   - m_BuildTarget: tvOS
     m_Icons:
@@ -532,6 +533,8 @@ PlayerSettings:
       m_SubKind: 
   m_BuildTargetBatching: []
 =======
+=======
+>>>>>>> 55f82182c3f46638bf481a8e41ed5b3bb7f8e40a
   m_BuildTargetPlatformIcons: []
   m_BuildTargetBatching:
   - m_BuildTarget: Standalone
@@ -540,6 +543,9 @@ PlayerSettings:
   - m_BuildTarget: WebGL
     m_StaticBatching: 0
     m_DynamicBatching: 0
+<<<<<<< HEAD
+>>>>>>> 55f82182c3f46638bf481a8e41ed5b3bb7f8e40a
+=======
 >>>>>>> 55f82182c3f46638bf481a8e41ed5b3bb7f8e40a
   m_BuildTargetShaderSettings: []
   m_BuildTargetGraphicsJobs: []

@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1199b65af99b06f4e912d77d2f7966bb, type: 3}
+  m_Name: Mr. Alvarez
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterData
+  characterName: Mr. Alvarez
+  maxNumberOfVisits: 2
+  numberOfRequiredVisits: 2
+  visitNumber: 0
+  satisfied: 0
+  willRevisit: 1
+  visits:
+  - intro:
+    - "Hello there! It\u2019s lovely to see you. I want to buy a bouquet for my wife."
+    optionA:
+    - "She\u2019s always been fond of <b>roses</b>\u2026 flowers that <b>aren\u2019t
+      too bold</b> but still elegant."
+    optionB:
+    - "Ah yes\u2026 <b>pink</b> brings her happiness."
+    optionC:
+    - She loves flowers so much that she used to spend months reading books about
+      them.
+    goodResult:
+    - "These colors\u2026 she\u2019ll recognize them instantly. You\u2019ve done
+      wonderfully."
+    badResult:
+    - "These are lovely\u2026 though she prefers softer tones. I\u2019ll explain
+      it better next time."
+    hiddenRequirements:
+    - {fileID: 11400000, guid: 43623bd7e8e55984f993fafcf5020958, type: 2}
+    - {fileID: 11400000, guid: c9802af7ee42e974c94dbf5bfa6a5803, type: 2}
+  - intro:
+    - Hello again! I was hoping this time, you could help me plan a bouquet and save
+      it instead?
+    optionA:
+    - "I was thinking\u2026 that I\u2019d like to set something\u2026 even if I\u2019m
+      not here one day, she\u2019ll still get flowers from me, at least for the last
+      time."
+    optionB:
+    - "<b>Lavender</b>\u2026 it\u2019s her favorite for <b>purity</b>."
+    optionC:
+    - Awesome! I know you got this.
+    goodResult:
+    - "Thank you dear, I\u2019m sure she will love it."
+    badResult:
+    - "These are interesting\u2026 But she will still appreciate the flowers. Thank
+      you for your help."
+    hiddenRequirements:
+    - {fileID: 11400000, guid: 2b064cb7b63cc49429a389fcff440f82, type: 2}
+  - intro: []
+    optionA: []
+    optionB: []
+    optionC: []
+    goodResult: []
+    badResult: []
+    hiddenRequirements: []

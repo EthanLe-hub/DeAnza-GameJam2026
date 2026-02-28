@@ -1,6 +1,7 @@
 // Ethan Le (2/24/2026):
 using UnityEngine; 
 using UnityEngine.UI; 
+using TMPro; 
 
 /**
  * Script to add a flower whenever player clicks a specific Flower button during bouquet construction. 
@@ -11,12 +12,27 @@ public class FlowerButton : MonoBehaviour
     public FlowerData flower; // Assign the SPECIFIC Flower object (specific Data Asset) in the Inspector. 
     public BouquetManager bouquet; // Assign BouquetManager script so the button is hooked to the current bouquet the player is constructing. 
     private Image flowerImage; // Retrieve it from the specific Flower Data Asset.   
+    private TextMeshProUGUI flowerText; // Retrieve it from the specific Flower Data Asset. 
+    private TextMeshProUGUI costText; // Retrieve it from the specific Flower Data Asset. 
 
     void Start()
     {
+        flowerText = transform.Find("NameText").GetComponent<TextMeshProUGUI>(); // Get the name TextMeshProUGUI component of the FlowerButton. 
+        costText = transform.Find("CostText").GetComponent<TextMeshProUGUI>(); // Get the cost TextMeshProUGUI component of the FlowerButton. 
         flowerImage = GetComponent<Image>(); // Get the Image component of the FlowerButton. 
 
-        if (flower != null && flowerImage != null) // Safety check to ensure we have both the Flower Object (for data) and the Button's image component. 
+        /* Safety checks to ensure we have the Flower Object (for data), the Button's name text component, the Button's cost text component, and the Button's image component. */ 
+        if (flower != null && flowerText != null)
+        {
+            flowerText.text = flower.flowerName; // Get the flower name from the specific Flower Data Asset and assign to Button text. 
+        }
+
+        if (flower != null && costText != null)
+        {
+            costText.text = flower.cost.ToString() + " coins"; // Get the flower cost from the specific Flower Data Asset and assign to Button text. 
+        }
+
+        if (flower != null && flowerImage != null) 
         {
             flowerImage.sprite = flower.sprite; // Get the sprite from the specific Flower Data Asset and assign to Button image. 
         } 

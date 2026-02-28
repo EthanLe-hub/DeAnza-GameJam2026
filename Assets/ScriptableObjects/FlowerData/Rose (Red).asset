@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b1a98d6e75b138408bae00f362ecf2d, type: 3}
-  m_Name: Tulip
+  m_Name: Rose (Red)
   m_EditorClassIdentifier: Assembly-CSharp::FlowerData
-  flowerName: Tulip
-  color: Pink
-  sprite: {fileID: 3897340488653738690, guid: 2893ddccab56a4a4e894b1d761f66358, type: 3}
-  cost: 10
-  meaning: 'Something round. '
+  flowerName: Rose (Red)
+  color: Red
+  sprite: {fileID: -1298970417023072901, guid: 1563a60ab19583542b705195f9a527c9, type: 3}
+  cost: 15
+  meaning: Passion, passionate, romantic

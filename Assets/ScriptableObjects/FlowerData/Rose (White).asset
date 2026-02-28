@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b1a98d6e75b138408bae00f362ecf2d, type: 3}
-  m_Name: Rose
+  m_Name: Rose (White)
   m_EditorClassIdentifier: Assembly-CSharp::FlowerData
-  flowerName: Rose
-  color: Pink
-  sprite: {fileID: -1298970417023072901, guid: 1563a60ab19583542b705195f9a527c9, type: 3}
-  cost: 5
-  meaning: 'A recognizable flower to express love. '
+  flowerName: Rose (White)
+  color: White
+  sprite: {fileID: -4147086527198339126, guid: 77ab2bce969518f4ebed7e896384cb00, type: 3}
+  cost: 6
+  meaning: Remembrance

@@ -7495,6 +7495,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1495411798}
   - component: {fileID: 1495411799}
+  - component: {fileID: 1495411800}
   m_Layer: 0
   m_Name: MainScreenUI
   m_TagString: Untagged
@@ -7540,6 +7541,18 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &1495411800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495411797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e79326d686aa04282e63a8f5984315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenuUIController
 --- !u!1 &1609456847
 GameObject:
   m_ObjectHideFlags: 0

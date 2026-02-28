@@ -33,9 +33,14 @@ MonoBehaviour:
     - "Thanks. I hope this\u2019ll help."
     badResult:
     - "...It\u2019s fine? Thanks."
+    optionAButtonTexts:
+    - What flowers do you have in mind?
+    optionBButtonTexts: []
+    optionCButtonTexts: []
     hiddenRequirements:
     - {fileID: 11400000, guid: 04b494d932e9a514995684dfc0acfeec, type: 2}
     - {fileID: 11400000, guid: 387652d0d2f9f12459f7d79950a0444e, type: 2}
+    maxBudget: 50
   - intro:
     - "Hey\u2026 I\u2019m back. It\u2019s for my wife again."
     optionA:
@@ -49,8 +54,12 @@ MonoBehaviour:
     - "This\u2026 feels calmer. I hope she likes it."
     badResult:
     - I might just be bad at this.
+    optionAButtonTexts: []
+    optionBButtonTexts: []
+    optionCButtonTexts: []
     hiddenRequirements:
     - {fileID: 11400000, guid: 43623bd7e8e55984f993fafcf5020958, type: 2}
+    maxBudget: 0
   - intro:
     - "Hi\u2026 This time is for me."
     optionA:
@@ -66,5 +75,10 @@ MonoBehaviour:
     - You know what? I kind of like this. Fresh start.
     badResult:
     - "Well\u2026At least I can\u2019t argue with myself."
+    optionAButtonTexts: []
+    optionBButtonTexts:
+    - What flowers do you have in mind?
+    optionCButtonTexts: []
     hiddenRequirements:
     - {fileID: 11400000, guid: acfe7d68125f24241baf636d43f968a2, type: 2}
+    maxBudget: 0

@@ -33,7 +33,12 @@ MonoBehaviour:
     badResult:
     - "It\u2019s\u2026 nice. But it seems like I should have given you specific color
       suggestions."
+    optionAButtonTexts:
+    - What flowers do you have in mind?
+    optionBButtonTexts: []
+    optionCButtonTexts: []
     hiddenRequirements:
     - {fileID: 11400000, guid: 43623bd7e8e55984f993fafcf5020958, type: 2}
     - {fileID: 11400000, guid: acfe7d68125f24241baf636d43f968a2, type: 2}
     - {fileID: 11400000, guid: 6392ef0304bf57944b491dd96195cc17, type: 2}
+    maxBudget: 0

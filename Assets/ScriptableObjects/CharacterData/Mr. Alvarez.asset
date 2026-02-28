@@ -35,9 +35,14 @@ MonoBehaviour:
     badResult:
     - "These are lovely\u2026 though she prefers softer tones. I\u2019ll explain
       it better next time."
+    optionAButtonTexts:
+    - What flowers do you have in mind?
+    optionBButtonTexts: []
+    optionCButtonTexts: []
     hiddenRequirements:
     - {fileID: 11400000, guid: 43623bd7e8e55984f993fafcf5020958, type: 2}
     - {fileID: 11400000, guid: c9802af7ee42e974c94dbf5bfa6a5803, type: 2}
+    maxBudget: 0
   - intro:
     - Hello again! I was hoping this time, you could help me plan a bouquet and save
       it instead?
@@ -54,12 +59,9 @@ MonoBehaviour:
     badResult:
     - "These are interesting\u2026 But she will still appreciate the flowers. Thank
       you for your help."
+    optionAButtonTexts: []
+    optionBButtonTexts: []
+    optionCButtonTexts: []
     hiddenRequirements:
     - {fileID: 11400000, guid: 2b064cb7b63cc49429a389fcff440f82, type: 2}
-  - intro: []
-    optionA: []
-    optionB: []
-    optionC: []
-    goodResult: []
-    badResult: []
-    hiddenRequirements: []
+    maxBudget: 0

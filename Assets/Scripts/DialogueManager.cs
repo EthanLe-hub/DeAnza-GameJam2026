@@ -1,23 +1,27 @@
-// Ethan Le (2/27/2026):
 using System.Collections;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 using UnityEngine;
-using TMPro; 
-using UnityEngine.InputSystem; 
-/** 
- * Script to handle the appropriate set of dialogue that the character/customer will say.
-**/ 
+using TMPro;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
+
+/**
+ * Handles character dialogue sequences, including nested button text sequences.
+ **/
 public class DialogueManager : MonoBehaviour
 {
-    public CharacterData currentCharacter;
-    public TextMeshProUGUI dialogueText;
+    [HideInInspector] public CharacterData currentCharacter;
+    [HideInInspector] public TextMeshProUGUI dialogueText;
 
-    private CharacterData.VisitDialogue currentVisit; // Current set of character dialogues for this visit. 
-    private bool waitingForClick;
+    [HideInInspector] public Button optionAButton;
+    [HideInInspector] public Button optionBButton;
+    [HideInInspector] public Button optionCButton;
+
+    private CharacterData.VisitDialogue currentVisit;
+    private int[] optionTextIndices = new int[3]; // Track which text index we are on per button
 
     public void StartVisit()
     {
-        // Safety check to ensure that a customer does not visit beyond their max defined visit: 
         if (currentCharacter.visitNumber >= currentCharacter.visits.Count)
         {
             Debug.LogWarning("No more visits defined.");
@@ -25,46 +29,134 @@ public class DialogueManager : MonoBehaviour
         }
 
         currentVisit = currentCharacter.visits[currentCharacter.visitNumber];
-        StartCoroutine(PlaySequence(currentVisit.intro));
+
+        // Reset button indices
+        optionTextIndices[0] = 0;
+        optionTextIndices[1] = 0;
+        optionTextIndices[2] = 0;
+
+        UpdateOptionButtons(); // Sets initial button texts and visibility
+        dialogueText.text = "";
     }
 
-    public void ChooseOption(int optionIndex)
+    private void UpdateOptionButtons()
     {
-        StopAllCoroutines();
-
-        switch (optionIndex) // Character's next dialogue depends on player option choice. 
+        // Option A
+        if (currentVisit.optionAButtonTexts != null && currentVisit.optionAButtonTexts.Count > 0)
         {
-            case 0:
-                StartCoroutine(PlaySequence(currentVisit.optionA));
-                break;
-            case 1:
-                StartCoroutine(PlaySequence(currentVisit.optionB));
-                break;
-            case 2:
-                StartCoroutine(PlaySequence(currentVisit.optionC));
-                break;
+            optionAButton.gameObject.SetActive(true);
+            optionAButton.GetComponentInChildren<TextMeshProUGUI>().text = currentVisit.optionAButtonTexts[0];
+            optionAButton.onClick.RemoveAllListeners();
+            optionAButton.onClick.AddListener(() => OnOptionClicked(0));
+        }
+        else
+        {
+            optionAButton.gameObject.SetActive(false);
+        }
+
+        // Option B
+        if (currentVisit.optionBButtonTexts != null && currentVisit.optionBButtonTexts.Count > 0)
+        {
+            optionBButton.gameObject.SetActive(true);
+            optionBButton.GetComponentInChildren<TextMeshProUGUI>().text = currentVisit.optionBButtonTexts[0];
+            optionBButton.onClick.RemoveAllListeners();
+            optionBButton.onClick.AddListener(() => OnOptionClicked(1));
+        }
+        else
+        {
+            optionBButton.gameObject.SetActive(false);
+        }
+
+        // Option C
+        if (currentVisit.optionCButtonTexts != null && currentVisit.optionCButtonTexts.Count > 0)
+        {
+            optionCButton.gameObject.SetActive(true);
+            optionCButton.GetComponentInChildren<TextMeshProUGUI>().text = currentVisit.optionCButtonTexts[0];
+            optionCButton.onClick.RemoveAllListeners();
+            optionCButton.onClick.AddListener(() => OnOptionClicked(2));
+        }
+        else
+        {
+            optionCButton.gameObject.SetActive(false);
         }
     }
 
-    public void ShowResult(bool goodBouquet) // Character's good/bad dialogue depends on if all FlowerData requirements are satisfied. 
+    private void OnOptionClicked(int optionIndex)
     {
-        StopAllCoroutines();
+        List<string> buttonTexts = optionIndex == 0 ? currentVisit.optionAButtonTexts :
+                                   optionIndex == 1 ? currentVisit.optionBButtonTexts :
+                                   currentVisit.optionCButtonTexts;
 
-        if (goodBouquet)
-            StartCoroutine(PlaySequence(currentVisit.goodResult));
+        // If more texts remain, show next text as "Continue"
+        if (buttonTexts != null && optionTextIndices[optionIndex] < buttonTexts.Count - 1)
+        {
+            optionTextIndices[optionIndex]++;
+            dialogueText.text = buttonTexts[optionTextIndices[optionIndex]];
+
+            // Only show Option C as "Continue" for nested sequences
+            optionAButton.gameObject.SetActive(false);
+            optionBButton.gameObject.SetActive(false);
+            optionCButton.gameObject.SetActive(true);
+            optionCButton.GetComponentInChildren<TextMeshProUGUI>().text = buttonTexts[optionTextIndices[optionIndex]];
+            optionCButton.onClick.RemoveAllListeners();
+            optionCButton.onClick.AddListener(() => OnOptionClicked(optionIndex));
+        }
         else
-            StartCoroutine(PlaySequence(currentVisit.badResult));
+        {
+            // Sequence finished, call main logic for that choice
+            optionAButton.gameObject.SetActive(false);
+            optionBButton.gameObject.SetActive(false);
+            optionCButton.gameObject.SetActive(false);
+
+            // Start dialogue lines associated with the choice
+            List<string> lines = optionIndex == 0 ? currentVisit.optionA :
+                                 optionIndex == 1 ? currentVisit.optionB :
+                                 currentVisit.optionC;
+
+            if (lines != null && lines.Count > 0)
+                StartCoroutine(PlaySequence(lines));
+        }
     }
 
-    IEnumerator PlaySequence(List<string> lines) // Play the dialogue, waiting for mouse-click when necessary. 
+    IEnumerator PlaySequence(List<string> lines)
     {
         foreach (string line in lines)
         {
             dialogueText.text = line;
-            waitingForClick = true;
-
             yield return new WaitUntil(() => Mouse.current.leftButton.wasPressedThisFrame);
-            waitingForClick = false;
+        }
+    }
+
+    public void ShowResult(bool goodBouquet)
+    {
+        StopAllCoroutines();
+
+        List<string> lines = goodBouquet ? currentVisit.goodResult : currentVisit.badResult;
+
+        // Only Option C is active for the "Continue" button
+        optionAButton.gameObject.SetActive(false);
+        optionBButton.gameObject.SetActive(false);
+
+        if (lines.Count > 0)
+        {
+            optionCButton.gameObject.SetActive(true);
+            optionCButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = lines[0];
+
+            int currentIndex = 1;
+            optionCButton.onClick.RemoveAllListeners();
+            optionCButton.onClick.AddListener(() =>
+            {
+                if (currentIndex < lines.Count)
+                {
+                    optionCButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = lines[currentIndex];
+                    currentIndex++;
+                }
+                else
+                {
+                    // End of sequence, you can add next logic here
+                    optionCButton.gameObject.SetActive(false);
+                }
+            });
         }
     }
 }

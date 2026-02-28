@@ -29,6 +29,10 @@ public class CharacterData : ScriptableObject
         public List<string> goodResult;
         public List<string> badResult;
 
+        public List<string> optionAButtonTexts; // Button text. 
+        public List<string> optionBButtonTexts; 
+        public List<string> optionCButtonTexts; 
+
         // Per-visit hidden requirements
         public List<FlowerData> hiddenRequirements;
         public int maxBudget; // optional budget

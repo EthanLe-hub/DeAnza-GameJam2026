@@ -6,15 +6,11 @@ using TMPro;
 public class CustomerManager : MonoBehaviour
 {
     [Header("Panels")]
-    public GameObject customerOrderPanel;   // Panel with dialogue
+    public GameObject customerOrderPanel;   // Parent panel for instantiated customer UI
     public GameObject bouquetConstructPanel; // Panel with BouquetManager + buttons
 
-    [Header("Customer UI Elements")]
-    public TextMeshProUGUI customerNameText;
-    public TextMeshProUGUI dialogueText;
-    public Button optionAButton;
-    public Button optionBButton;
-    public Button optionCButton;
+    [Header("Prefab")]
+    public GameObject customerUIPrefab;     // Assign your CustomerUI prefab here
 
     [Header("References")]
     public CharacterData narrativeCharacter1;
@@ -27,6 +23,7 @@ public class CustomerManager : MonoBehaviour
     public BouquetManager bouquetManager;
 
     private CharacterData currentCustomer;
+    private CustomerUIController currentCustomerUI;
     private bool isNarrativeCustomer = false;
 
     void Start()
@@ -36,14 +33,16 @@ public class CustomerManager : MonoBehaviour
 
     public void SpawnCustomer()
     {
-        // Decide randomly: 50% normal vs. narrative (adjust as you like)
         bool pickNarrative = Random.value > 0.5f;
+
+        // Destroy old UI if it exists
+        if (currentCustomerUI != null)
+            Destroy(currentCustomerUI.gameObject);
 
         if (pickNarrative)
         {
             isNarrativeCustomer = true;
 
-            // Randomly pick one of the 5 narrative characters
             int index = Random.Range(0, 5);
             switch (index)
             {
@@ -61,7 +60,6 @@ public class CustomerManager : MonoBehaviour
             isNarrativeCustomer = false;
             normalCustomerSpawner.SpawnRandomNormalCustomer();
             currentCustomer = normalCustomerSpawner.genericNormalCustomer;
-
             SetupNormalCustomer();
         }
     }
@@ -72,27 +70,19 @@ public class CustomerManager : MonoBehaviour
         customerOrderPanel.SetActive(true);
         bouquetConstructPanel.SetActive(false);
 
-        customerNameText.text = currentCustomer.characterName;
+        // Instantiate prefab dynamically
+        GameObject uiObj = Instantiate(customerUIPrefab, customerOrderPanel.transform);
+        currentCustomerUI = uiObj.GetComponent<CustomerUIController>();
 
-        // Enable all 3 options
-        optionAButton.gameObject.SetActive(true);
-        optionBButton.gameObject.SetActive(true);
-        optionCButton.gameObject.SetActive(true);
+        currentCustomerUI.dialogueText.text = "";
 
-        // Remove old listeners
-        optionAButton.onClick.RemoveAllListeners();
-        optionBButton.onClick.RemoveAllListeners();
-        optionCButton.onClick.RemoveAllListeners();
-
-        // Assign listeners
-        optionAButton.onClick.AddListener(() => dialogueManager.ChooseOption(0));
-        optionBButton.onClick.AddListener(() => dialogueManager.ChooseOption(1));
-        optionCButton.onClick.AddListener(() => {
-            // Option C leads to bouquet construction
-            ShowBouquetPanel();
-        });
-
+        // Assign DialogueManager references
         dialogueManager.currentCharacter = currentCustomer;
+        dialogueManager.dialogueText = currentCustomerUI.dialogueText;
+        dialogueManager.optionAButton = currentCustomerUI.optionAButton;
+        dialogueManager.optionBButton = currentCustomerUI.optionBButton;
+        dialogueManager.optionCButton = currentCustomerUI.optionCButton;
+
         dialogueManager.StartVisit();
     }
     #endregion
@@ -103,22 +93,26 @@ public class CustomerManager : MonoBehaviour
         customerOrderPanel.SetActive(true);
         bouquetConstructPanel.SetActive(false);
 
-        customerNameText.text = currentCustomer.characterName;
+        // Instantiate prefab dynamically
+        GameObject uiObj = Instantiate(customerUIPrefab, customerOrderPanel.transform);
+        currentCustomerUI = uiObj.GetComponent<CustomerUIController>();
 
-        // Only one option: use Option C button
-        optionAButton.gameObject.SetActive(false);
-        optionBButton.gameObject.SetActive(false);
-        optionCButton.gameObject.SetActive(true);
+        currentCustomerUI.dialogueText.text = "";
 
-        optionCButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Bouquet"; // change label
+        currentCustomerUI.optionAButton.gameObject.SetActive(false);
+        currentCustomerUI.optionBButton.gameObject.SetActive(false);
 
-        // Remove old listeners
-        optionCButton.onClick.RemoveAllListeners();
+        currentCustomerUI.optionCButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Bouquet";
+        currentCustomerUI.optionCButton.onClick.RemoveAllListeners();
+        currentCustomerUI.optionCButton.onClick.AddListener(() => ShowBouquetPanel());
 
-        // Clicking takes you to bouquet panel
-        optionCButton.onClick.AddListener(() => {
-            ShowBouquetPanel();
-        });
+        dialogueManager.currentCharacter = currentCustomer;
+        dialogueManager.dialogueText = currentCustomerUI.dialogueText;
+        dialogueManager.optionAButton = currentCustomerUI.optionAButton;
+        dialogueManager.optionBButton = currentCustomerUI.optionBButton;
+        dialogueManager.optionCButton = currentCustomerUI.optionCButton;
+
+        dialogueManager.StartVisit();
     }
     #endregion
 
@@ -127,7 +121,6 @@ public class CustomerManager : MonoBehaviour
         customerOrderPanel.SetActive(false);
         bouquetConstructPanel.SetActive(true);
 
-        // Reset bouquet manager for new bouquet
         bouquetManager.ClearBouquet();
     }
 }

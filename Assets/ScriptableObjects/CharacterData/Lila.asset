@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1199b65af99b06f4e912d77d2f7966bb, type: 3}
+  m_Name: Lila
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterData
+  characterName: Lila
+  maxNumberOfVisits: 1
+  numberOfRequiredVisits: 1
+  visitNumber: 0
+  satisfied: 0
+  willRevisit: 1
+  visits:
+  - intro:
+    - "Hello\u2026 I want to buy flowers for my boyfriend."
+    optionA:
+    - "Hmm\u2026 I think one of them should be <b>Baby\u2019s Breath</b>?"
+    optionB:
+    - I have no preferences in that. But if possible, I want it to show <b>admiration</b>,
+      <b>joy</b>, and <b>innocence</b>.
+    optionC:
+    - Great! Please make sure to make it meaningful, he would love that.
+    goodResult:
+    - "This is perfect! You\u2019re amazing. Thank you so much!!"
+    badResult:
+    - "It\u2019s\u2026 nice. But it seems like I should have given you specific color
+      suggestions."
+    hiddenRequirements:
+    - {fileID: 11400000, guid: 43623bd7e8e55984f993fafcf5020958, type: 2}
+    - {fileID: 11400000, guid: acfe7d68125f24241baf636d43f968a2, type: 2}
+    - {fileID: 11400000, guid: 6392ef0304bf57944b491dd96195cc17, type: 2}

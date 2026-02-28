@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1199b65af99b06f4e912d77d2f7966bb, type: 3}
+  m_Name: Noah
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterData
+  characterName: Noah
+  maxNumberOfVisits: 1
+  numberOfRequiredVisits: 1
+  visitNumber: 0
+  satisfied: 0
+  willRevisit: 1
+  visits:
+  - intro:
+    - "Hello. I\u2019d like to get flowers for someone very important to me."
+    optionA:
+    - She had a <b>sunflower</b>-patterned dress once, and I think it would be perfect.
+    optionB:
+    - "<b>Yellow</b> and <b>white</b>\u2026 That reminds me of her."
+    optionC:
+    - Thank you. Feel free to go above and beyond on this, I trust your artistic
+      judgment.
+    goodResult:
+    - "This looks just right\u2026 she\u2019ll be happy."
+    badResult:
+    - "Oh\u2026 It\u2019s okay. I hope she still likes it."
+    hiddenRequirements:
+    - {fileID: 11400000, guid: 7fbee5eb5db6c2b4780d903beb699aec, type: 2}
+    - {fileID: 11400000, guid: 5d532511089afa2489cd838f31552a8c, type: 2}
+    - {fileID: 11400000, guid: 6392ef0304bf57944b491dd96195cc17, type: 2}

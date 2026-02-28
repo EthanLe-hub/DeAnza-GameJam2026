@@ -1,0 +1,19 @@
+:root {
+}
+
+
+
+.header {
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+}
+
+.button {
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+.button:hover {
+    transition-property: all;
+    text-shadow: 0 0 100px rgb(0, 0, 0);
+}

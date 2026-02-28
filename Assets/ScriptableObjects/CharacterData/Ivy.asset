@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1199b65af99b06f4e912d77d2f7966bb, type: 3}
+  m_Name: Ivy
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterData
+  characterName: Ivy
+  maxNumberOfVisits: 2
+  numberOfRequiredVisits: 1
+  visitNumber: 0
+  satisfied: 0
+  willRevisit: 1
+  visits:
+  - intro:
+    - "Hey\u2026 I need flowers for someone I actually like. Don\u2019t mess this
+      up. I have <b>40 coins</b>."
+    optionA:
+    - "Hmm\u2026 I\u2019m thinking of <b>Lavender</b>. We\u2019ve talked about it
+      once."
+    optionB:
+    - "<b>Cute</b> colors! <b>Pink</b>, <b>purple</b>\u2026 don\u2019t make it boring."
+    optionC:
+    - Great. Just make sure it actually says what I mean.
+    goodResult:
+    - "Finally! That actually looks like how I feel. They\u2019ll get it."
+    badResult:
+    - "Oh\u2026 Did I not give you a clear direction?"
+    - "I\u2019ll come back tomorrow. Just do better next time."
+    hiddenRequirements:
+    - {fileID: 11400000, guid: 2b064cb7b63cc49429a389fcff440f82, type: 2}
+    - {fileID: 11400000, guid: 43623bd7e8e55984f993fafcf5020958, type: 2}
+  - intro:
+    - Alright. Redemption round. Same <b>40 coins</b>. This time, I need it to actually
+      look cute.
+    optionA:
+    - Still <b>Lavender</b>. You can also add <b>rose</b>.
+    optionB:
+    - <b>Pink</b> stays, <b>purple</b> too. But add something with <b>confidence</b>.
+    optionC:
+    - Alright. Impress me.
+    goodResult:
+    - "That\u2019s much better. Thank you."
+    badResult:
+    - "Wow\u2026 Maybe I\u2019ll just confess without flowers."
+    hiddenRequirements:
+    - {fileID: 11400000, guid: 2b064cb7b63cc49429a389fcff440f82, type: 2}
+    - {fileID: 11400000, guid: 43623bd7e8e55984f993fafcf5020958, type: 2}
+    - {fileID: 11400000, guid: 387652d0d2f9f12459f7d79950a0444e, type: 2}

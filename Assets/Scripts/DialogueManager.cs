@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic; 
 using UnityEngine;
 using TMPro; 
-
+using UnityEngine.InputSystem; 
 /** 
  * Script to handle the appropriate set of dialogue that the character/customer will say.
 **/ 
@@ -63,7 +63,7 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text = line;
             waitingForClick = true;
 
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+            yield return new WaitUntil(() => Mouse.current.leftButton.wasPressedThisFrame);
             waitingForClick = false;
         }
     }

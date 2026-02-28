@@ -1,71 +1,106 @@
-// Ethan Le (2/27/2026):
-using UnityEngine; 
+using System.Collections.Generic;
+using UnityEngine;
 
-/** 
- * Script to check if the player's constructed bouquet matches the customer's requirements.
-**/ 
 public class BouquetSubmissionManager : MonoBehaviour
 {
     public BouquetManager bouquetManager;
     public CharacterData currentCharacter;
-    public DialogueManager dialogueManager; 
+    public DialogueManager dialogueManager;
 
-    public bool goodBouquet;
+    [Header("Optional: Budget Check")]
+    public bool checkCoinBudget = false;
+
+    [HideInInspector] public bool goodBouquet;
 
     public void SubmitBouquet()
     {
-        FlowerData[] bouquet = bouquetManager.GetBouquet(); // Retrieve player's constructed bouquet that was submitted. 
+        FlowerData[] bouquet = bouquetManager.GetBouquet();
 
-        var currentVisit = currentCharacter.visits[currentCharacter.visitNumber]; // Get the appropriate set of customer overall details (dialogue and requirements) based on current visit. 
-
-        int matches = 0; // Checking if the requirements are met. 
-
-        foreach (FlowerData requirement in currentVisit.hiddenRequirements) // Loop through the per-visit hidden requirements. 
+        // Get the current visit
+        if (currentCharacter.visitNumber >= currentCharacter.visits.Count)
         {
+            Debug.LogWarning("No more visits defined for this character.");
+            return;
+        }
+
+        var currentVisit = currentCharacter.visits[currentCharacter.visitNumber];
+
+        // If no hidden requirements, automatically good
+        if (currentVisit.hiddenRequirements == null || currentVisit.hiddenRequirements.Count == 0)
+        {
+            goodBouquet = true;
+        }
+        else
+        {
+            goodBouquet = CheckRequirements(bouquet, currentVisit.hiddenRequirements);
+        }
+
+        // Optional: check total coin cost
+        if (checkCoinBudget && currentVisit.maxBudget > 0)
+        {
+            int totalCost = 0;
             foreach (FlowerData flower in bouquet)
             {
-                if (flower == requirement)
-                {
-                    matches++; // Increment completion status if the current FlowerData matches a customer's requirement. 
-                    break;
-                }
+                if (flower != null)
+                    totalCost += flower.cost;
+            }
+
+            if (totalCost > currentVisit.maxBudget)
+            {
+                goodBouquet = false; // Over budget → bad bouquet
             }
         }
 
-        goodBouquet = matches == currentVisit.hiddenRequirements.Count; // goodBouquet flag is set to true if ALL hidden requirements for the current visit are met. 
-
         currentCharacter.satisfied = goodBouquet;
 
-        dialogueManager.ShowResult(goodBouquet); // Show the appropriate customer response after submitting bouquet. 
+        // Show the appropriate dialogue
+        dialogueManager.ShowResult(goodBouquet);
 
         HandleRevisitLogic();
     }
 
+    bool CheckRequirements(FlowerData[] bouquet, List<FlowerData> requirements)
+    {
+        // Count bouquet flowers
+        Dictionary<FlowerData, int> bouquetCounts = new Dictionary<FlowerData, int>();
+        foreach (FlowerData f in bouquet)
+        {
+            if (f == null) continue;
+            if (!bouquetCounts.ContainsKey(f)) bouquetCounts[f] = 0;
+            bouquetCounts[f]++;
+        }
+
+        // Check each requirement (assume quantity = 1 for now, you can extend later)
+        foreach (FlowerData req in requirements)
+        {
+            if (!bouquetCounts.ContainsKey(req) || bouquetCounts[req] < 1)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     void HandleRevisitLogic()
     {
-        currentCharacter.visitNumber++; // Increment the customer's visit number. 
+        currentCharacter.visitNumber++;
 
-        // Prevent going beyond defined visits -- ensure the customer does not visit beyond max defined visits: 
         if (currentCharacter.visitNumber >= currentCharacter.visits.Count)
         {
             currentCharacter.willRevisit = false;
             return;
         }
 
-        // If the customer has not completed all REQUIRED visits yet, they will revisit again soon. 
         if (currentCharacter.visitNumber < currentCharacter.numberOfRequiredVisits)
         {
             currentCharacter.willRevisit = true;
         }
-
-        // Otherwise, if the customer is not satisfied and is still not at the max visit number for their character, they will revisit. 
         else if (currentCharacter.visitNumber < currentCharacter.maxNumberOfVisits &&
                  !currentCharacter.satisfied)
         {
             currentCharacter.willRevisit = true;
         }
-
-        // Otherwise, if they are either satisfied and do not return upon satisfaction, or if they are at the max number of visits, then they will not visit again. 
         else
         {
             currentCharacter.willRevisit = false;

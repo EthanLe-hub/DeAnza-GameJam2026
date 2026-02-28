@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine; 
 
 /** 
- * Script for creating different instances of characters/customers.
+ * Script for creating different instances of characters/customers (both narrative and normal ones).
 **/
 [CreateAssetMenu(fileName = "New Character", menuName = "Flower Shop/Character")]
 public class CharacterData : ScriptableObject
@@ -31,6 +31,7 @@ public class CharacterData : ScriptableObject
 
         // Per-visit hidden requirements
         public List<FlowerData> hiddenRequirements;
+        public int maxBudget; // optional budget
     }
 
     // Index 0 = Visit 1, 1 = Visit 2, 2 = Visit 3: 

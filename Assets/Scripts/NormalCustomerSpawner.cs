@@ -30,56 +30,52 @@ public class NormalCustomerSpawner : MonoBehaviour
     [Header("Normal Customer Examples")]
     public List<NormalCustomerData> normalCustomers = new List<NormalCustomerData>();
 
+/*
     void Start()
     {
         SpawnRandomNormalCustomer();
     }
+*/
 
     public void SpawnRandomNormalCustomer()
     {
         if (normalCustomers.Count == 0)
+    {
+        Debug.LogWarning("No normal customers defined!");
+        return;
+    }
+    // Pick a random normal customer
+    int index = Random.Range(0, normalCustomers.Count);
+    NormalCustomerData selected = normalCustomers[index];
+    // Assign the generic CharacterData for this spawn
+    genericNormalCustomer.characterName = selected.customerName;
+    genericNormalCustomer.maxNumberOfVisits = 1;
+    genericNormalCustomer.numberOfRequiredVisits = 1;
+    genericNormalCustomer.visitNumber = 0;
+    genericNormalCustomer.satisfied = false;
+    genericNormalCustomer.willRevisit = false;
+    // Create a single visit dynamically
+    CharacterData.VisitDialogue visit = new CharacterData.VisitDialogue();
+    visit.intro = selected.dialogues;
+    visit.optionA = new List<string>();
+    visit.optionB = new List<string>();
+    visit.optionC = new List<string>();
+    visit.goodResult = new List<string>() { "Thank you! This is perfect." };
+    visit.badResult = new List<string>() { "Hmm… this isn't quite right." };
+    // Assign hidden requirements with quantities
+    visit.hiddenRequirements = new List<FlowerData>();
+    foreach (var req in selected.hiddenRequirements)
+    {
+        for (int i = 0; i < req.quantity; i++)
         {
-            Debug.LogWarning("No normal customers defined!");
-            return;
+            visit.hiddenRequirements.Add(req.flower);
         }
-
-        // Pick a random normal customer
-        int index = Random.Range(0, normalCustomers.Count);
-        NormalCustomerData selected = normalCustomers[index];
-
-        // Assign the generic CharacterData for this spawn
-        genericNormalCustomer.characterName = selected.customerName;
-        genericNormalCustomer.maxNumberOfVisits = 1; // Normal customers only visit once
-        genericNormalCustomer.numberOfRequiredVisits = 1;
-        genericNormalCustomer.visitNumber = 0;
-        genericNormalCustomer.satisfied = false;
-        genericNormalCustomer.willRevisit = false;
-
-        // Create a single visit dynamically
-        CharacterData.VisitDialogue visit = new CharacterData.VisitDialogue();
-        visit.intro = selected.dialogues; // assign all lines as intro
-        visit.optionA = new List<string>(); // leave empty if no options
-        visit.optionB = new List<string>();
-        visit.optionC = new List<string>();
-        visit.goodResult = new List<string>() { "Thank you! This is perfect." };
-        visit.badResult = new List<string>() { "Hmm… this isn’t quite right." };
-
-        // Assign hidden requirements with quantities
-        visit.hiddenRequirements = new List<FlowerData>();
-        foreach (var req in selected.hiddenRequirements)
-        {
-            for (int i = 0; i < req.quantity; i++)
-            {
-                visit.hiddenRequirements.Add(req.flower);
-            }
-        }
-
-        // Overwrite visits
-        genericNormalCustomer.visits = new List<CharacterData.VisitDialogue>() { visit };
-
-        // Start dialogue
-        dialogueManager.currentCharacter = genericNormalCustomer;
-        dialogueManager.StartVisit();
+    }
+    // Overwrite visits
+    genericNormalCustomer.visits = new List<CharacterData.VisitDialogue>() { visit };
+    // REMOVE THESE LINES - Let CustomerManager handle dialogue setup
+    // dialogueManager.currentCharacter = genericNormalCustomer;
+    // dialogueManager.StartVisit();
     }
 
     /*** Example Setup ***/

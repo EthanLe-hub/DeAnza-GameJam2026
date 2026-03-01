@@ -24,7 +24,7 @@ public class CustomerManager : MonoBehaviour
 
     private CharacterData currentCustomer;
     private CustomerUIController currentCustomerUI;
-    private bool isNarrativeCustomer = false;
+    //private bool isNarrativeCustomer = false;
 
     void Start()
     {
@@ -33,16 +33,15 @@ public class CustomerManager : MonoBehaviour
 
     public void SpawnCustomer()
     {
-        bool pickNarrative = Random.value > 0.5f;
-
+        // For testing: true = narrative, false = normal
+        bool pickNarrative = true; // <- Change this for testing  
         // Destroy old UI if it exists
         if (currentCustomerUI != null)
             Destroy(currentCustomerUI.gameObject);
-
         if (pickNarrative)
         {
-            isNarrativeCustomer = true;
-
+            Debug.Log("Spawning Narrative character!");
+            
             int index = Random.Range(0, 5);
             switch (index)
             {
@@ -52,14 +51,30 @@ public class CustomerManager : MonoBehaviour
                 case 3: currentCustomer = narrativeCharacter4; break;
                 case 4: currentCustomer = narrativeCharacter5; break;
             }
-
+            // Make sure narrative character has valid data
+            if (currentCustomer == null)
+            {
+                Debug.LogError($"Narrative character at index {index} is null!");
+                return;
+            }
             SetupNarrativeCustomer();
         }
         else
         {
-            isNarrativeCustomer = false;
+            Debug.Log("Spawning Normal character!");
+            
+            // First spawn the random normal customer data
             normalCustomerSpawner.SpawnRandomNormalCustomer();
+            
+            // Then use that data
             currentCustomer = normalCustomerSpawner.genericNormalCustomer;
+            
+            if (currentCustomer == null)
+            {
+                Debug.LogError("Failed to create normal customer!");
+                return;
+            }
+            
             SetupNormalCustomer();
         }
     }

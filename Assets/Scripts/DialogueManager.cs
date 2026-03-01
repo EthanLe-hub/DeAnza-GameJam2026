@@ -46,7 +46,8 @@ public class DialogueManager : MonoBehaviour
         {
             // Narrative customer
             UpdateOptionButtons();
-            dialogueText.text = "";
+            string introText = (currentVisit.intro != null && currentVisit.intro.Count > 0) ? currentVisit.intro[0] : "Hello!";
+            dialogueText.text = introText;
         }
         else
         {

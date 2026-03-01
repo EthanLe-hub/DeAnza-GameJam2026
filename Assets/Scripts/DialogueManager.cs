@@ -18,6 +18,8 @@ public class DialogueManager : MonoBehaviour
     [HideInInspector] public Button optionBButton;
     [HideInInspector] public Button optionCButton;
 
+    public System.Action OnDialogueComplete; 
+
     private CharacterData.VisitDialogue currentVisit;
     private int[] optionTextIndices = new int[3]; // Track which text index we are on per button
 
@@ -65,13 +67,13 @@ public class DialogueManager : MonoBehaviour
         string introText = (currentVisit.intro != null && currentVisit.intro.Count > 0) ? currentVisit.intro[0] : "Hello!";
         dialogueText.text = introText;
 
-        optionCButton.GetComponentInChildren<TextMeshProUGUI>().text = "Continue";
+        optionCButton.GetComponentInChildren<TextMeshProUGUI>().text = "I'll take care of it.";
 
+        // Hide button after click or optionally continue to bouquet
         optionCButton.onClick.RemoveAllListeners();
         optionCButton.onClick.AddListener(() =>
         {
-            // Hide button after click or optionally continue to bouquet
-            optionCButton.gameObject.SetActive(false);
+            OnDialogueComplete?.Invoke();
         });
     }
 
@@ -147,21 +149,21 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            // Sequence finished: don't hide narrative buttons
-            if (currentVisit.optionAButtonTexts != null && currentVisit.optionAButtonTexts.Count > 0)
-                optionAButton.gameObject.SetActive(true);
-            if (currentVisit.optionBButtonTexts != null && currentVisit.optionBButtonTexts.Count > 0)
-                optionBButton.gameObject.SetActive(true);
-            if (currentVisit.optionCButtonTexts != null && currentVisit.optionCButtonTexts.Count > 0)
-                optionCButton.gameObject.SetActive(true);
-
             // Start main dialogue lines
             List<string> lines = optionIndex == 0 ? currentVisit.optionA :
                                 optionIndex == 1 ? currentVisit.optionB :
                                 currentVisit.optionC;
 
             if (lines != null && lines.Count > 0)
+            {
                 StartCoroutine(PlaySequence(lines));
+            }
+
+            // If this was Option C, move to bouquet after dialogue
+            if (optionIndex == 2)
+            {
+                OnDialogueComplete?.Invoke();
+            }
         }
     }
 

@@ -83,6 +83,9 @@ public class CustomerManager : MonoBehaviour
         dialogueManager.optionBButton = currentCustomerUI.optionBButton;
         dialogueManager.optionCButton = currentCustomerUI.optionCButton;
 
+if (dialogueManager.dialogueText == null)
+    Debug.LogError("Dialogue Text is null! Did you assign it in CustomerUIController?");
+
         dialogueManager.StartVisit();
     }
     #endregion
@@ -112,6 +115,9 @@ public class CustomerManager : MonoBehaviour
         dialogueManager.optionBButton = currentCustomerUI.optionBButton;
         dialogueManager.optionCButton = currentCustomerUI.optionCButton;
 
+if (dialogueManager.dialogueText == null)
+    Debug.LogError("Dialogue Text is null! Did you assign it in CustomerUIController?");
+    
         dialogueManager.StartVisit();
     }
     #endregion

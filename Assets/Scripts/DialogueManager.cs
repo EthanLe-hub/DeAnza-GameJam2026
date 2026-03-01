@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 /**
  * Handles character dialogue sequences, including nested button text sequences.
+ * Supports both narrative customers (dynamic A/B/C options) and normal customers (simple dialogue + Continue button)
  **/
 public class DialogueManager : MonoBehaviour
 {
@@ -35,8 +36,42 @@ public class DialogueManager : MonoBehaviour
         optionTextIndices[1] = 0;
         optionTextIndices[2] = 0;
 
-        UpdateOptionButtons(); // Sets initial button texts and visibility
-        dialogueText.text = "";
+        // Determine if any button texts exist (narrative customer)
+        bool hasAnyButtonTexts =
+            (currentVisit.optionAButtonTexts != null && currentVisit.optionAButtonTexts.Count > 0) ||
+            (currentVisit.optionBButtonTexts != null && currentVisit.optionBButtonTexts.Count > 0) ||
+            (currentVisit.optionCButtonTexts != null && currentVisit.optionCButtonTexts.Count > 0);
+
+        if (hasAnyButtonTexts)
+        {
+            // Narrative customer
+            UpdateOptionButtons();
+            dialogueText.text = "";
+        }
+        else
+        {
+            // Normal customer or fallback
+            ShowNormalCustomerIntro();
+        }
+    }
+
+    private void ShowNormalCustomerIntro()
+    {
+        optionAButton.gameObject.SetActive(false);
+        optionBButton.gameObject.SetActive(false);
+        optionCButton.gameObject.SetActive(true);
+
+        string introText = (currentVisit.intro != null && currentVisit.intro.Count > 0) ? currentVisit.intro[0] : "Hello!";
+        dialogueText.text = introText;
+
+        optionCButton.GetComponentInChildren<TextMeshProUGUI>().text = "Continue";
+
+        optionCButton.onClick.RemoveAllListeners();
+        optionCButton.onClick.AddListener(() =>
+        {
+            // Hide button after click or optionally continue to bouquet
+            optionCButton.gameObject.SetActive(false);
+        });
     }
 
     private void UpdateOptionButtons()
@@ -87,13 +122,13 @@ public class DialogueManager : MonoBehaviour
                                    optionIndex == 1 ? currentVisit.optionBButtonTexts :
                                    currentVisit.optionCButtonTexts;
 
-        // If more texts remain, show next text as "Continue"
+        // Nested "Continue" button behavior
         if (buttonTexts != null && optionTextIndices[optionIndex] < buttonTexts.Count - 1)
         {
             optionTextIndices[optionIndex]++;
             dialogueText.text = buttonTexts[optionTextIndices[optionIndex]];
 
-            // Only show Option C as "Continue" for nested sequences
+            // Show only Option C as Continue
             optionAButton.gameObject.SetActive(false);
             optionBButton.gameObject.SetActive(false);
             optionCButton.gameObject.SetActive(true);
@@ -103,12 +138,12 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            // Sequence finished, call main logic for that choice
+            // Sequence finished: hide buttons
             optionAButton.gameObject.SetActive(false);
             optionBButton.gameObject.SetActive(false);
             optionCButton.gameObject.SetActive(false);
 
-            // Start dialogue lines associated with the choice
+            // Start main dialogue lines
             List<string> lines = optionIndex == 0 ? currentVisit.optionA :
                                  optionIndex == 1 ? currentVisit.optionB :
                                  currentVisit.optionC;
@@ -133,14 +168,13 @@ public class DialogueManager : MonoBehaviour
 
         List<string> lines = goodBouquet ? currentVisit.goodResult : currentVisit.badResult;
 
-        // Only Option C is active for the "Continue" button
         optionAButton.gameObject.SetActive(false);
         optionBButton.gameObject.SetActive(false);
 
-        if (lines.Count > 0)
+        if (lines != null && lines.Count > 0)
         {
             optionCButton.gameObject.SetActive(true);
-            optionCButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = lines[0];
+            optionCButton.GetComponentInChildren<TextMeshProUGUI>().text = lines[0];
 
             int currentIndex = 1;
             optionCButton.onClick.RemoveAllListeners();
@@ -148,12 +182,11 @@ public class DialogueManager : MonoBehaviour
             {
                 if (currentIndex < lines.Count)
                 {
-                    optionCButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = lines[currentIndex];
+                    optionCButton.GetComponentInChildren<TextMeshProUGUI>().text = lines[currentIndex];
                     currentIndex++;
                 }
                 else
                 {
-                    // End of sequence, you can add next logic here
                     optionCButton.gameObject.SetActive(false);
                 }
             });

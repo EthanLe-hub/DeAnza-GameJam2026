@@ -34,8 +34,10 @@ MonoBehaviour:
     - "Oh\u2026 It\u2019s okay. I hope she still likes it."
     optionAButtonTexts:
     - What flowers do you have in mind?
-    optionBButtonTexts: []
-    optionCButtonTexts: []
+    optionBButtonTexts:
+    - Do you prefer certain colors for the bouquet?
+    optionCButtonTexts:
+    - "I\u2019ll take care of it."
     hiddenRequirements:
     - {fileID: 11400000, guid: 7fbee5eb5db6c2b4780d903beb699aec, type: 2}
     - {fileID: 11400000, guid: 5d532511089afa2489cd838f31552a8c, type: 2}

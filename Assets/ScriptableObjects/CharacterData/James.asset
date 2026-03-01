@@ -35,8 +35,10 @@ MonoBehaviour:
     - "...It\u2019s fine? Thanks."
     optionAButtonTexts:
     - What flowers do you have in mind?
-    optionBButtonTexts: []
-    optionCButtonTexts: []
+    optionBButtonTexts:
+    - Do you prefer certain colors for the bouquet?
+    optionCButtonTexts:
+    - "I\u2019ll take care of it."
     hiddenRequirements:
     - {fileID: 11400000, guid: 04b494d932e9a514995684dfc0acfeec, type: 2}
     - {fileID: 11400000, guid: 387652d0d2f9f12459f7d79950a0444e, type: 2}
@@ -54,9 +56,12 @@ MonoBehaviour:
     - "This\u2026 feels calmer. I hope she likes it."
     badResult:
     - I might just be bad at this.
-    optionAButtonTexts: []
-    optionBButtonTexts: []
-    optionCButtonTexts: []
+    optionAButtonTexts:
+    - What happened after you gave her the bouquet?
+    optionBButtonTexts:
+    - Could you give me another hint about the flowers or colors?
+    optionCButtonTexts:
+    - "I\u2019ll take care of it."
     hiddenRequirements:
     - {fileID: 11400000, guid: 43623bd7e8e55984f993fafcf5020958, type: 2}
     maxBudget: 0
@@ -75,10 +80,13 @@ MonoBehaviour:
     - You know what? I kind of like this. Fresh start.
     badResult:
     - "Well\u2026At least I can\u2019t argue with myself."
-    optionAButtonTexts: []
+    optionAButtonTexts:
+    - No bouquet for your wife this time?
+    - "Oh no. I\u2019m sorry\u2026"
     optionBButtonTexts:
     - What flowers do you have in mind?
-    optionCButtonTexts: []
+    optionCButtonTexts:
+    - "I\u2019ll take care of it."
     hiddenRequirements:
     - {fileID: 11400000, guid: acfe7d68125f24241baf636d43f968a2, type: 2}
     maxBudget: 0

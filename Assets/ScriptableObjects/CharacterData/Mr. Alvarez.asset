@@ -37,8 +37,10 @@ MonoBehaviour:
       it better next time."
     optionAButtonTexts:
     - What flowers do you have in mind?
-    optionBButtonTexts: []
-    optionCButtonTexts: []
+    optionBButtonTexts:
+    - Do you prefer certain colors for the bouquet?
+    optionCButtonTexts:
+    - "I\u2019ll take care of it."
     hiddenRequirements:
     - {fileID: 11400000, guid: 43623bd7e8e55984f993fafcf5020958, type: 2}
     - {fileID: 11400000, guid: c9802af7ee42e974c94dbf5bfa6a5803, type: 2}
@@ -59,9 +61,12 @@ MonoBehaviour:
     badResult:
     - "These are interesting\u2026 But she will still appreciate the flowers. Thank
       you for your help."
-    optionAButtonTexts: []
-    optionBButtonTexts: []
-    optionCButtonTexts: []
+    optionAButtonTexts:
+    - Why do you want to save it instead of giving it now?
+    optionBButtonTexts:
+    - Could you give me another hint about the flowers or colors?
+    optionCButtonTexts:
+    - "I\u2019ll take care of it."
     hiddenRequirements:
     - {fileID: 11400000, guid: 2b064cb7b63cc49429a389fcff440f82, type: 2}
     maxBudget: 0

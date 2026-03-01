@@ -36,12 +36,14 @@ MonoBehaviour:
     - "I\u2019ll come back tomorrow. Just do better next time."
     optionAButtonTexts:
     - What flowers do you have in mind?
-    optionBButtonTexts: []
-    optionCButtonTexts: []
+    optionBButtonTexts:
+    - Do you prefer certain colors for the bouquet?
+    optionCButtonTexts:
+    - "I\u2019ll take care of it."
     hiddenRequirements:
     - {fileID: 11400000, guid: 2b064cb7b63cc49429a389fcff440f82, type: 2}
     - {fileID: 11400000, guid: 43623bd7e8e55984f993fafcf5020958, type: 2}
-    maxBudget: 0
+    maxBudget: 40
   - intro:
     - Alright. Redemption round. Same <b>40 coins</b>. This time, I need it to actually
       look cute.
@@ -57,10 +59,12 @@ MonoBehaviour:
     - "Wow\u2026 Maybe I\u2019ll just confess without flowers."
     optionAButtonTexts:
     - What flowers do you have in mind?
-    optionBButtonTexts: []
-    optionCButtonTexts: []
+    optionBButtonTexts:
+    - Do you prefer certain colors for the bouquet?
+    optionCButtonTexts:
+    - "I\u2019ll take care of it."
     hiddenRequirements:
     - {fileID: 11400000, guid: 2b064cb7b63cc49429a389fcff440f82, type: 2}
     - {fileID: 11400000, guid: 43623bd7e8e55984f993fafcf5020958, type: 2}
     - {fileID: 11400000, guid: 387652d0d2f9f12459f7d79950a0444e, type: 2}
-    maxBudget: 0
+    maxBudget: 40

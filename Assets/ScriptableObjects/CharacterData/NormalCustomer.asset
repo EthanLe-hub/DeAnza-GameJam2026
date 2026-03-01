@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1199b65af99b06f4e912d77d2f7966bb, type: 3}
   m_Name: NormalCustomer
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
-  characterName: 
+  characterName: Charles
   maxNumberOfVisits: 1
   numberOfRequiredVisits: 1
   visitNumber: 0
@@ -20,19 +20,23 @@ MonoBehaviour:
   willRevisit: 0
   visits:
   - intro:
-    - "Just a <b>Red</b> Rose, please. I don\u2019t have any more specific suggestions
-      really."
-    optionA: []
-    optionB: []
+    - 
+    optionA:
+    - 
+    optionB:
+    - 
     optionC:
     - 
     goodResult:
-    - Thank you! This is perfect.
+    - 
     badResult:
-    - "Hmm\u2026 this isn\u2019t quite right."
-    optionAText: 
-    optionBText: 
-    optionCText: 
+    - 
+    optionAButtonTexts:
+    - 
+    optionBButtonTexts:
+    - 
+    optionCButtonTexts:
+    - 
     hiddenRequirements:
-    - {fileID: 11400000, guid: 04b494d932e9a514995684dfc0acfeec, type: 2}
+    - {fileID: 0}
     maxBudget: 0

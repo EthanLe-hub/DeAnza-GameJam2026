@@ -918,7 +918,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomerManager
   customerOrderPanel: {fileID: 1415791933}
   bouquetConstructPanel: {fileID: 1914462220}
-  customerUIPrefab: {fileID: 2239058898212304386, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
+  customerUIPrefab: {fileID: 1176998833946445333, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
   narrativeCharacter1: {fileID: 11400000, guid: b49863867f437414a86f8e3f5cc49f16, type: 2}
   narrativeCharacter2: {fileID: 11400000, guid: a54947d2b734ead49a732e1eeff09dbf, type: 2}
   narrativeCharacter3: {fileID: 11400000, guid: 48ec94d01ad90da4d9a55e512feb9bd5, type: 2}
@@ -4185,14 +4185,14 @@ MonoBehaviour:
   bouquetManager: {fileID: 1309809384}
   dialogueManager: {fileID: 628868336}
   normalCustomers:
-  - customerName: 
+  - customerName: Tom
     dialogues:
     - "Just a <b>Red</b> Rose, please. I don\u2019t have any more specific suggestions
       really."
     hiddenRequirements:
     - flower: {fileID: 11400000, guid: 04b494d932e9a514995684dfc0acfeec, type: 2}
       quantity: 1
-  - customerName: 
+  - customerName: Sally
     dialogues:
     - "H-hi\u2026 I\u2019d like a bouquet including any <b>Sunflower</b> and <b>Yellow
       Tulip</b>."
@@ -4201,18 +4201,18 @@ MonoBehaviour:
       quantity: 1
     - flower: {fileID: 11400000, guid: acfe7d68125f24241baf636d43f968a2, type: 2}
       quantity: 1
-  - customerName: 
+  - customerName: Chris
     dialogues:
     - Yo. Just letting you know I only have <b>30 coins</b>. Do whatever fits.
     hiddenRequirements: []
-  - customerName: 
+  - customerName: Bob
     dialogues:
     - "Heya! I\u2019m good with anything. Just surprise me. My only suggestion is
       to include <b>pink</b>."
     hiddenRequirements:
     - flower: {fileID: 11400000, guid: 43623bd7e8e55984f993fafcf5020958, type: 2}
       quantity: 1
-  - customerName: 
+  - customerName: Harry
     dialogues:
     - "Hello there. At least <b>one White Lily</b> and <b>one White Rose</b>. It\u2019s
       for my sister."
@@ -4221,13 +4221,13 @@ MonoBehaviour:
       quantity: 1
     - flower: {fileID: 11400000, guid: a30b9a86bef7f4146a5152cb4a70203d, type: 2}
       quantity: 1
-  - customerName: 
+  - customerName: Jennie
     dialogues:
     - "I\u2019m confessing to someone. I need something <b>romantic</b> and <b>passionate</b>."
     hiddenRequirements:
     - flower: {fileID: 11400000, guid: 04b494d932e9a514995684dfc0acfeec, type: 2}
       quantity: 1
-  - customerName: 
+  - customerName: Pearl
     dialogues:
     - "Hi\u2026 Can I get a bouquet of <b>Pink Rose</b>, <b>Baby\u2019s Breath</b>,
       and <b>Purple Tulip</b>? That would be all."
@@ -4238,13 +4238,13 @@ MonoBehaviour:
       quantity: 1
     - flower: {fileID: 11400000, guid: c9802af7ee42e974c94dbf5bfa6a5803, type: 2}
       quantity: 1
-  - customerName: 
+  - customerName: Charles
     dialogues:
     - "It\u2019s simple. Just <b>five Red Roses</b>, please."
     hiddenRequirements:
     - flower: {fileID: 11400000, guid: 04b494d932e9a514995684dfc0acfeec, type: 2}
       quantity: 5
-  - customerName: 
+  - customerName: Carol
     dialogues:
     - <b>One Orange Lily</b> and <b>one Purple Tulip</b>. You can be creative with
       it.
@@ -4253,7 +4253,7 @@ MonoBehaviour:
       quantity: 1
     - flower: {fileID: 11400000, guid: c9802af7ee42e974c94dbf5bfa6a5803, type: 2}
       quantity: 1
-  - customerName: 
+  - customerName: Caroline
     dialogues:
     - "\u2026I think I want something <b>joyful</b>. Maybe include a <b>Yellow Tulip</b>?"
     hiddenRequirements:

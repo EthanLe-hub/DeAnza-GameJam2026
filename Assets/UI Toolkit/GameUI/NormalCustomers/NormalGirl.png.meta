@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 71a98497876e00342b62b715af46c73b
+guid: 211f1d1fe048d8b46a5f4effec53976d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5211705871417040898
-    second: Untitled design (4)_0
+      213: 8958549250970621149
+    second: NormalGirl_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -178,13 +178,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Untitled design (4)_0
+      name: NormalGirl_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2732
-        height: 2048
+        x: 70
+        y: 127
+        width: 239
+        height: 695
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,8 +193,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 20061a390e2b35840800000000000000
-      internalID: 5211705871417040898
+      spriteID: dd412fe4419235c70800000000000000
+      internalID: 8958549250970621149
       vertices: []
       indices: 
       edges: []
@@ -213,7 +213,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Untitled design (4)_0: 5211705871417040898
+      NormalGirl_0: 8958549250970621149
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

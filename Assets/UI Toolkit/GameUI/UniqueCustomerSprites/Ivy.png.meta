@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 71a98497876e00342b62b715af46c73b
+guid: 4f5ae22dc32c6b846be5d60fc580ab46
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5211705871417040898
-    second: Untitled design (4)_0
+      213: -3214629705306122718
+    second: Ivy_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -178,13 +178,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Untitled design (4)_0
+      name: Ivy_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2732
-        height: 2048
+        x: 9
+        y: 89
+        width: 209
+        height: 603
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,8 +193,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 20061a390e2b35840800000000000000
-      internalID: 5211705871417040898
+      spriteID: 2265fca90575363d0800000000000000
+      internalID: -3214629705306122718
       vertices: []
       indices: 
       edges: []
@@ -213,7 +213,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Untitled design (4)_0: 5211705871417040898
+      Ivy_0: -3214629705306122718
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

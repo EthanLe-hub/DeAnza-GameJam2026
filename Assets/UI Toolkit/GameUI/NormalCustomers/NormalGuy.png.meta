@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 71a98497876e00342b62b715af46c73b
+guid: 65f5140d283f1c94a825c32cbf833c57
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5211705871417040898
-    second: Untitled design (4)_0
+      213: -2332140229309061787
+    second: NormalGuy_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -178,13 +178,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Untitled design (4)_0
+      name: NormalGuy_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2732
-        height: 2048
+        x: 47
+        y: 118
+        width: 232
+        height: 715
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,8 +193,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 20061a390e2b35840800000000000000
-      internalID: 5211705871417040898
+      spriteID: 565a2a151d292afd0800000000000000
+      internalID: -2332140229309061787
       vertices: []
       indices: 
       edges: []
@@ -213,7 +213,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Untitled design (4)_0: 5211705871417040898
+      NormalGuy_0: -2332140229309061787
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

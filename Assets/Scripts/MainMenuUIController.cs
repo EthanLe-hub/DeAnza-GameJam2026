@@ -1,77 +1,91 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.InputSystem; // new Input System
+using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
-public class MainMenuUIController : MonoBehaviour
+public class MainMenuController : MonoBehaviour
 {
-    private VisualElement mainMenu;
-    private VisualElement introSequence;
-    private VisualElement[] steps;
-    private int currentStep = 0;
+    public UIDocument uiDocument;
+    public string gameplaySceneName = "CustomerOrderPanel"; // Change to your real scene name
 
-    private void OnEnable()
+    private VisualElement mainMenuContainer;
+    private Button playButton;
+
+    private VisualElement introContainer;
+    private List<VisualElement> introPanels = new List<VisualElement>();
+
+    private int currentIndex = -1;
+    private bool introActive = false;
+
+    void Start()
     {
-        var root = GetComponent<UIDocument>().rootVisualElement;
+        var root = uiDocument.rootVisualElement;
 
-        mainMenu = root.Q<VisualElement>("MainMenuContainer");
-        introSequence = root.Q<VisualElement>("IntroStorySequence");
+        // Main Menu
+        mainMenuContainer = root.Q<VisualElement>("MainMenuContainer");
+        playButton = root.Q<Button>("PlayButton");
 
-        introSequence.style.display = DisplayStyle.None;
+        // Intro
+        introContainer = root.Q<VisualElement>("IntroStorySequenceExposition");
 
-        int stepCount = 8;
-        steps = new VisualElement[stepCount];
-        for (int i = 1; i <= stepCount; i++)
+        for (int i = 1; i <= 8; i++)
         {
-            steps[i - 1] = introSequence.Q<VisualElement>($"IntroStorySequence{i}");
-            if (steps[i - 1] != null)
-                steps[i - 1].style.display = DisplayStyle.None;
+            var panel = root.Q<VisualElement>($"IntroStorySequence{i}");
+            if (panel != null)
+                introPanels.Add(panel);
         }
 
-        root.Q<Button>("PlayButton").clicked += ShowIntroSequence;
+        // Ensure intro is hidden at start
+        introContainer.style.display = DisplayStyle.None;
+
+        playButton.clicked += StartIntro;
     }
 
-    private void Update()
+    void StartIntro()
     {
-        // Only advance story if intro is active
-        if (introSequence.style.display == DisplayStyle.Flex)
+        mainMenuContainer.style.display = DisplayStyle.None;
+        introContainer.style.display = DisplayStyle.Flex;
+
+        introActive = true;
+        currentIndex = -1;
+
+        ShowNextPanel();
+    }
+
+    void Update()
+    {
+        if (!introActive) return;
+
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
-            {
-                StepToNext();
-            }
-        }
-    }
-
-    private void ShowIntroSequence()
-    {
-        mainMenu.style.display = DisplayStyle.None;
-        introSequence.style.display = DisplayStyle.Flex;
-        currentStep = 0;
-
-        if (steps.Length > 0)
-            steps[currentStep].style.display = DisplayStyle.Flex;
-    }
-
-    private void StepToNext()
-    {
-        if (currentStep < steps.Length)
-        {
-            steps[currentStep].style.display = DisplayStyle.None;
-            currentStep++;
-
-            if (currentStep < steps.Length)
-                steps[currentStep].style.display = DisplayStyle.Flex;
-            else
-                ShowMainMenu(); // optional: go back to main menu
+            ShowNextPanel();
         }
     }
 
-    private void ShowMainMenu()
+    void ShowNextPanel()
     {
-        introSequence.style.display = DisplayStyle.None;
-        foreach (var step in steps)
-            step.style.display = DisplayStyle.None;
+        // Hide previous
+        if (currentIndex >= 0 && currentIndex < introPanels.Count)
+        {
+            introPanels[currentIndex].style.display = DisplayStyle.None;
+        }
 
-        mainMenu.style.display = DisplayStyle.Flex;
+        currentIndex++;
+
+        if (currentIndex >= introPanels.Count)
+        {
+            EndIntro();
+            return;
+        }
+
+        introPanels[currentIndex].style.display = DisplayStyle.Flex;
     }
-} 
+
+    void EndIntro()
+    {
+        introActive = false;
+
+        // Load your actual gameplay scene
+        SceneManager.LoadScene(gameplaySceneName);
+    }
+}

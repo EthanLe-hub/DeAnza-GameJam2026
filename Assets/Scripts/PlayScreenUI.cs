@@ -25,7 +25,7 @@ public class PlayScreenUI : MonoBehaviour
         if (playPanel != null)
         { 
             playPanel.SetActive(false); // Turn off the Play panel when Close button is clicked. 
-            mainScreenPanel.SetActive(true); // Turn on main screen.
+            mainScreenPanel.SetActive(false); // Turn on main screen.
         }
     }
 }

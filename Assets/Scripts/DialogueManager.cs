@@ -120,18 +120,26 @@ public class DialogueManager : MonoBehaviour
     private void OnOptionClicked(int optionIndex)
     {
         List<string> buttonTexts = optionIndex == 0 ? currentVisit.optionAButtonTexts :
-                                   optionIndex == 1 ? currentVisit.optionBButtonTexts :
-                                   currentVisit.optionCButtonTexts;
+                                optionIndex == 1 ? currentVisit.optionBButtonTexts :
+                                currentVisit.optionCButtonTexts;
 
-        // Nested "Continue" button behavior
+        // Nested "Continue" behavior
         if (buttonTexts != null && optionTextIndices[optionIndex] < buttonTexts.Count - 1)
         {
             optionTextIndices[optionIndex]++;
             dialogueText.text = buttonTexts[optionTextIndices[optionIndex]];
 
-            // Show only Option C as Continue
-            optionAButton.gameObject.SetActive(false);
-            optionBButton.gameObject.SetActive(false);
+            // Only hide buttons if this is a "Continue-only" path
+            bool isNormalContinue = (currentVisit.optionAButtonTexts == null || currentVisit.optionAButtonTexts.Count == 0) &&
+                                    (currentVisit.optionBButtonTexts == null || currentVisit.optionBButtonTexts.Count == 0);
+
+            if (isNormalContinue)
+            {
+                optionAButton.gameObject.SetActive(false);
+                optionBButton.gameObject.SetActive(false);
+            }
+
+            // Always update Option C
             optionCButton.gameObject.SetActive(true);
             optionCButton.GetComponentInChildren<TextMeshProUGUI>().text = buttonTexts[optionTextIndices[optionIndex]];
             optionCButton.onClick.RemoveAllListeners();
@@ -139,15 +147,18 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            // Sequence finished: hide buttons
-            optionAButton.gameObject.SetActive(false);
-            optionBButton.gameObject.SetActive(false);
-            optionCButton.gameObject.SetActive(false);
+            // Sequence finished: don't hide narrative buttons
+            if (currentVisit.optionAButtonTexts != null && currentVisit.optionAButtonTexts.Count > 0)
+                optionAButton.gameObject.SetActive(true);
+            if (currentVisit.optionBButtonTexts != null && currentVisit.optionBButtonTexts.Count > 0)
+                optionBButton.gameObject.SetActive(true);
+            if (currentVisit.optionCButtonTexts != null && currentVisit.optionCButtonTexts.Count > 0)
+                optionCButton.gameObject.SetActive(true);
 
             // Start main dialogue lines
             List<string> lines = optionIndex == 0 ? currentVisit.optionA :
-                                 optionIndex == 1 ? currentVisit.optionB :
-                                 currentVisit.optionC;
+                                optionIndex == 1 ? currentVisit.optionB :
+                                currentVisit.optionC;
 
             if (lines != null && lines.Count > 0)
                 StartCoroutine(PlaySequence(lines));

@@ -1,0 +1,6 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/WorkStation1Desk.uss?fileID=7433441132597879392&amp;guid=1451ce8bf39b73d4984fee2639cb56bb&amp;type=3#WorkStation1Desk"/>
+    <ui:VisualElement name="WorkStation1Desk" style="flex-grow: 1; display: flex; background-color: rgba(255, 255, 255, 0);">
+        <ui:Image source="project://database/Assets/UI%20Toolkit/GameUI/WorkStation1Assets/WorkStation1Desk.png?fileID=21300000&amp;guid=5047c4b71e011144295b2487f3576ab4&amp;type=3#WorkStation1Desk" name="WarkStation1Desk" style="top: 18%;"/>
+    </ui:VisualElement>
+</ui:UXML>

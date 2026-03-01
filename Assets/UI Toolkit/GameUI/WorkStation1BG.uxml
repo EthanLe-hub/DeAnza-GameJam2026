@@ -1,0 +1,4 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/WorkStation1BG.uss?fileID=7433441132597879392&amp;guid=eb22f312c3a364845b48a2fe2d6cf1fc&amp;type=3#WorkStation1BG"/>
+    <ui:VisualElement name="WorkStation1BG" style="flex-grow: 1; display: flex; background-color: rgba(255, 255, 255, 0); background-image: url(&quot;project://database/Assets/UI%20Toolkit/GameUI/WorkStation1Assets/WorkStation1BG.png?fileID=5211705871417040898&amp;guid=71a98497876e00342b62b715af46c73b&amp;type=3#Untitled design (4)_0&quot;);"/>
+</ui:UXML>

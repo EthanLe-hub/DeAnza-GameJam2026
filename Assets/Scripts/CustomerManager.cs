@@ -34,8 +34,9 @@ public class CustomerManager : MonoBehaviour
 
     public void SpawnCustomer()
     {
-        // For testing: true = narrative, false = normal
-        bool pickNarrative = false; // <- Change this for testing  
+        // Randomize narrative vs normal: 50% chance
+        bool pickNarrative = Random.value < 0.5f; 
+        
         // Destroy old UI if it exists
         if (currentCustomerUI != null)
             Destroy(currentCustomerUI.gameObject);

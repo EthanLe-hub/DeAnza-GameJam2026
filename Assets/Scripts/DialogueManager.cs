@@ -189,15 +189,22 @@ public class DialogueManager : MonoBehaviour
         if (lines != null && lines.Count > 0)
         {
             optionCButton.gameObject.SetActive(true);
-            optionCButton.GetComponentInChildren<TextMeshProUGUI>().text = lines[0];
 
-            int currentIndex = 1;
+            int currentIndex = 0;
+
+            // 🔥 FIRST line goes into the dialogue bubble
+            dialogueText.text = lines[currentIndex];
+            currentIndex++;
+
+            // Button always says Continue
+            optionCButton.GetComponentInChildren<TextMeshProUGUI>().text = "Continue";
+
             optionCButton.onClick.RemoveAllListeners();
             optionCButton.onClick.AddListener(() =>
             {
                 if (currentIndex < lines.Count)
                 {
-                    optionCButton.GetComponentInChildren<TextMeshProUGUI>().text = lines[currentIndex];
+                    dialogueText.text = lines[currentIndex];
                     currentIndex++;
                 }
                 else

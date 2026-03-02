@@ -901,6 +901,7 @@ GameObject:
   - component: {fileID: 133187506}
   - component: {fileID: 133187505}
   - component: {fileID: 133187504}
+  - component: {fileID: 133187508}
   m_Layer: 5
   m_Name: OrangeLily
   m_TagString: Untagged
@@ -915,18 +916,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 133187502}
-  m_LocalRotation: {x: 0.00065099116, y: 0.9993285, z: -0.028904276, w: -0.022507194}
-  m_LocalPosition: {x: 0, y: 0, z: -2.2188}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.028910846, y: -0.007262954, z: 0.00021007138, w: -0.9995556}
+  m_LocalPosition: {x: 0, y: 0, z: -0.87961316}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1142946073}
   - {fileID: 162417945}
   m_Father: {fileID: 1914462221}
-  m_LocalEulerAnglesHint: {x: 3.31, y: 182.585, z: 0.149}
+  m_LocalEulerAnglesHint: {x: -3.313, y: 360.834, z: -0.048}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -675, y: -179.039}
+  m_AnchoredPosition: {x: -675.0207, y: -178.96136}
   m_SizeDelta: {x: 134.3369, y: 273.037}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &133187504
@@ -1037,6 +1038,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 133187502}
   m_CullTransparentMesh: 1
+--- !u!114 &133187508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133187502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc02d91324a4a44d99ca29829220df4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIImageFlipper
+  imageToFlip: {fileID: 133187506}
+  flipX: 1
+  flipY: 0
 --- !u!1 &144448082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,6 +1122,7 @@ GameObject:
   - component: {fileID: 146371267}
   - component: {fileID: 146371266}
   - component: {fileID: 146371265}
+  - component: {fileID: 146371269}
   m_Layer: 5
   m_Name: PurpleTulip
   m_TagString: Untagged
@@ -1120,18 +1137,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146371263}
-  m_LocalRotation: {x: 0.10372179, y: 0.9945143, z: -0.0014042087, w: 0.013463956}
-  m_LocalPosition: {x: 0, y: 0, z: 0.0178}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.0014121972, y: 0.013540559, z: -0.103721716, w: 0.9945132}
+  m_LocalPosition: {x: 0, y: 0, z: 0.7624275}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 610355345}
   - {fileID: 1936939483}
   m_Father: {fileID: 1914462221}
-  m_LocalEulerAnglesHint: {x: 0.32, y: 178.482, z: 11.904}
+  m_LocalEulerAnglesHint: {x: 0.322, y: 1.527, z: -11.904}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -363, y: -169.79}
+  m_AnchoredPosition: {x: -389.8255, y: -164.13281}
   m_SizeDelta: {x: 101.3914, y: 277.172}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &146371265
@@ -1242,6 +1259,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146371263}
   m_CullTransparentMesh: 1
+--- !u!114 &146371269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146371263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc02d91324a4a44d99ca29829220df4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIImageFlipper
+  imageToFlip: {fileID: 146371267}
+  flipX: 1
+  flipY: 0
 --- !u!1 &162417944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,6 +1740,7 @@ GameObject:
   - component: {fileID: 283607661}
   - component: {fileID: 283607660}
   - component: {fileID: 283607659}
+  - component: {fileID: 283607663}
   m_Layer: 5
   m_Name: Sunflower
   m_TagString: Untagged
@@ -1722,7 +1755,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 283607657}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00023855409}
+  m_LocalRotation: {x: -0, y: -0.016427, z: -0, w: -0.99986506}
   m_LocalPosition: {x: 0, y: 0, z: 0.0185}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1730,7 +1763,7 @@ RectTransform:
   - {fileID: 771799765}
   - {fileID: 716904746}
   m_Father: {fileID: 1914462221}
-  m_LocalEulerAnglesHint: {x: 0, y: 180.027, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 361.882, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 619, y: -231.67}
@@ -1844,6 +1877,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 283607657}
   m_CullTransparentMesh: 1
+--- !u!114 &283607663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283607657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc02d91324a4a44d99ca29829220df4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIImageFlipper
+  imageToFlip: {fileID: 283607661}
+  flipX: 0
+  flipY: 0
 --- !u!1 &285114859
 GameObject:
   m_ObjectHideFlags: 0
@@ -2453,6 +2501,7 @@ GameObject:
   - component: {fileID: 418504982}
   - component: {fileID: 418504981}
   - component: {fileID: 418504980}
+  - component: {fileID: 418504984}
   m_Layer: 5
   m_Name: WhiteRose
   m_TagString: Untagged
@@ -2467,15 +2516,15 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 418504978}
-  m_LocalRotation: {x: -0, y: 0.9997274, z: -0, w: 0.023348594}
+  m_LocalRotation: {x: -0, y: 0.0038210652, z: -0, w: -0.9999928}
   m_LocalPosition: {x: 0, y: 0, z: 0.8324}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1260632848}
   - {fileID: 833727824}
   m_Father: {fileID: 1914462221}
-  m_LocalEulerAnglesHint: {x: 0, y: 177.324, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 359.562, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 484, y: -224.405}
@@ -2589,6 +2638,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 418504978}
   m_CullTransparentMesh: 1
+--- !u!114 &418504984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418504978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc02d91324a4a44d99ca29829220df4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIImageFlipper
+  imageToFlip: {fileID: 418504982}
+  flipX: 1
+  flipY: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

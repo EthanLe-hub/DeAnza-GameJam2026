@@ -32,9 +32,35 @@ public class CustomerManager : MonoBehaviour
         SpawnCustomer();
     }
 
+    /// <summary>
+    /// Spawn either a narrative or normal customer randomly
+    /// </summary>
+    public void SpawnCustomer()
+    {
+        if (currentCustomerUI != null)
+            Destroy(currentCustomerUI.gameObject);
+
+        bool pickNarrative = true; //Random.value < 0.5f;
+
+        if (pickNarrative)
+            SpawnNarrativeCustomer();
+        else
+            SpawnNormalCustomer();
+    }
+
+    #region Narrative Customers
+
+    /// <summary>
+    /// Resets all narrative characters at the start of the game
+    /// </summary>
     private void ResetAllNarrativeCustomers()
     {
-        CharacterData[] narratives = { narrativeCharacter1, narrativeCharacter2, narrativeCharacter3, narrativeCharacter4, narrativeCharacter5 };
+        CharacterData[] narratives = {
+            narrativeCharacter1, narrativeCharacter2,
+            narrativeCharacter3, narrativeCharacter4,
+            narrativeCharacter5
+        };
+
         foreach (var c in narratives)
         {
             if (c != null)
@@ -45,22 +71,12 @@ public class CustomerManager : MonoBehaviour
         }
     }
 
-    public void SpawnCustomer()
-    {
-        if (currentCustomerUI != null)
-            Destroy(currentCustomerUI.gameObject);
-
-        bool pickNarrative = Random.value < 0.5f;
-
-        if (pickNarrative)
-            SpawnNarrativeCustomer();
-        else
-            SpawnNormalCustomer();
-    }
-
-    #region Narrative Customer Setup
+    /// <summary>
+    /// Spawn a narrative customer that is still eligible to revisit
+    /// </summary>
     private void SpawnNarrativeCustomer()
     {
+        // Get all narrative characters that can still revisit
         List<CharacterData> availableNarratives = new List<CharacterData>();
         CharacterData[] narratives = { narrativeCharacter1, narrativeCharacter2, narrativeCharacter3, narrativeCharacter4, narrativeCharacter5 };
         foreach (var c in narratives)
@@ -69,21 +85,33 @@ public class CustomerManager : MonoBehaviour
 
         if (availableNarratives.Count == 0)
         {
-            Debug.Log("No available narrative characters. Spawning normal customer instead.");
+            Debug.Log("No narrative characters available. Spawning normal customer instead.");
             SpawnNormalCustomer();
             return;
         }
 
+        // Pick one at random
         int index = Random.Range(0, availableNarratives.Count);
-        currentCustomer = Instantiate(availableNarratives[index]);
+        CharacterData template = availableNarratives[index];
+
+        // Clone only for UI isolation, but preserve the original's visitNumber and willRevisit
+        currentCustomer = Instantiate(template);
+
+        // Important: store reference to the original SO so we can update visitNumber later
+        bouquetSubmissionManager.originalCharacterReference = template;
+
+        // Setup UI
         SetupCustomerUI();
     }
+
     #endregion
 
-    #region Normal Customer Setup
+    #region Normal Customers
+
     private void SpawnNormalCustomer()
     {
         normalCustomerSpawner.SpawnRandomNormalCustomer();
+
         if (normalCustomerSpawner.genericNormalCustomer == null)
         {
             Debug.LogError("Failed to create normal customer!");
@@ -93,22 +121,23 @@ public class CustomerManager : MonoBehaviour
         currentCustomer = Instantiate(normalCustomerSpawner.genericNormalCustomer);
         SetupCustomerUI(isNormal: true);
     }
+
     #endregion
 
     #region UI Setup
+
     private void SetupCustomerUI(bool isNormal = false)
     {
         customerOrderPanel.SetActive(true);
         bouquetConstructPanel.SetActive(false);
 
+        // Instantiate UI prefab
         GameObject uiObj = Instantiate(customerUIPrefab, customerOrderPanel.transform);
         Transform cashierTable = customerOrderPanel.transform.Find("CashierTable");
         int insertIndex = cashierTable.GetSiblingIndex() + 1;
         uiObj.transform.SetSiblingIndex(insertIndex);
 
         currentCustomerUI = uiObj.GetComponent<CustomerUIController>();
-
-        // Set sprite and clear dialogue
         currentCustomerUI.SetCharacterSprite(currentCustomer.characterSprite);
         currentCustomerUI.dialogueText.text = "";
 
@@ -117,14 +146,17 @@ public class CustomerManager : MonoBehaviour
         currentCustomerUI.optionBButton.onClick.RemoveAllListeners();
         currentCustomerUI.optionCButton.onClick.RemoveAllListeners();
 
+        // Normal customer special handling
         if (isNormal)
         {
             currentCustomerUI.optionAButton.gameObject.SetActive(false);
             currentCustomerUI.optionBButton.gameObject.SetActive(false);
+
             currentCustomerUI.optionCButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Bouquet";
             currentCustomerUI.optionCButton.onClick.AddListener(() => ShowBouquetPanel());
         }
 
+        // Assign DialogueManager references
         dialogueManager.currentCharacter = currentCustomer;
         bouquetSubmissionManager.currentCharacter = currentCustomer;
         dialogueManager.dialogueText = currentCustomerUI.dialogueText;
@@ -137,6 +169,7 @@ public class CustomerManager : MonoBehaviour
 
         dialogueManager.StartVisit();
     }
+
     #endregion
 
     private void ShowBouquetPanel()

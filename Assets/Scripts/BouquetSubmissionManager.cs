@@ -5,6 +5,7 @@ public class BouquetSubmissionManager : MonoBehaviour
 {
     public BouquetManager bouquetManager;
     public CharacterData currentCharacter;
+    public CharacterData originalCharacterReference; // assign in CustomerManager before UI setup
     public DialogueManager dialogueManager;
 
     public GameObject customerOrderPanel;
@@ -71,12 +72,36 @@ public class BouquetSubmissionManager : MonoBehaviour
         return true;
     }
 
-    private void HandleRevisitLogic()
+    void HandleRevisitLogic()
     {
-        // ALWAYS increment visit
-        currentCharacter.visitNumber++;
+        if (originalCharacterReference == null) return;
 
-        // Will revisit until maxNumberOfVisits is reached
-        currentCharacter.willRevisit = currentCharacter.visitNumber < currentCharacter.maxNumberOfVisits;
+        // Always increment visitNumber
+        originalCharacterReference.visitNumber++;
+
+        // Update satisfied state on original
+        originalCharacterReference.satisfied = currentCharacter.satisfied;
+
+        // Determine willRevisit based on original data
+        var c = originalCharacterReference;
+
+        if (c.visitNumber >= c.visits.Count)
+        {
+            c.willRevisit = false;
+            return;
+        }
+
+        if (c.visitNumber < c.numberOfRequiredVisits)
+        {
+            c.willRevisit = true;
+        }
+        else if (c.visitNumber < c.maxNumberOfVisits && !c.satisfied)
+        {
+            c.willRevisit = true;
+        }
+        else
+        {
+            c.willRevisit = false;
+        }
     }
-}
+} 

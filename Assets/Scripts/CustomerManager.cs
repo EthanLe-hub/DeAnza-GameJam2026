@@ -40,7 +40,7 @@ public class CustomerManager : MonoBehaviour
         if (currentCustomerUI != null)
             Destroy(currentCustomerUI.gameObject);
 
-        bool pickNarrative = true; //Random.value < 0.5f;
+        bool pickNarrative = Random.value < 0.5f;
 
         if (pickNarrative)
             SpawnNarrativeCustomer();

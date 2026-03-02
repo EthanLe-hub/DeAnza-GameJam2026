@@ -2617,8 +2617,20 @@ PrefabInstance:
       value: CustomerUIController
       objectReference: {fileID: 0}
     - target: {fileID: 1597978008644408164, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ca41b7ffa1e183448cb2cb1d599a3e8, type: 2}
+    - target: {fileID: 1597978008644408164, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1389737527646681918, guid: 6ca41b7ffa1e183448cb2cb1d599a3e8, type: 2}
+    - target: {fileID: 1597978008644408164, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
       propertyPath: m_VerticalAlignment
       value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 1597978008644408164, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3370396592545288003, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
       propertyPath: m_Pivot.x
@@ -2717,8 +2729,20 @@ PrefabInstance:
       value: 166
       objectReference: {fileID: 0}
     - target: {fileID: 4171757384199637336, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ca41b7ffa1e183448cb2cb1d599a3e8, type: 2}
+    - target: {fileID: 4171757384199637336, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1389737527646681918, guid: 6ca41b7ffa1e183448cb2cb1d599a3e8, type: 2}
+    - target: {fileID: 4171757384199637336, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
       propertyPath: m_VerticalAlignment
       value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171757384199637336, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4684939857962167629, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2757,12 +2781,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6563022425630771349, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ca41b7ffa1e183448cb2cb1d599a3e8, type: 2}
+    - target: {fileID: 6563022425630771349, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1389737527646681918, guid: 6ca41b7ffa1e183448cb2cb1d599a3e8, type: 2}
+    - target: {fileID: 6563022425630771349, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
       propertyPath: m_VerticalAlignment
       value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 6563022425630771349, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6563022425630771349, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6695220330080650988, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2837,8 +2873,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8177751014510972532, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ca41b7ffa1e183448cb2cb1d599a3e8, type: 2}
+    - target: {fileID: 8177751014510972532, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1389737527646681918, guid: 6ca41b7ffa1e183448cb2cb1d599a3e8, type: 2}
+    - target: {fileID: 8177751014510972532, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
       propertyPath: m_VerticalAlignment
       value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 8177751014510972532, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

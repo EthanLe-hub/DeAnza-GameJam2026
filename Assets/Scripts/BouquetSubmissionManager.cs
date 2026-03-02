@@ -20,7 +20,6 @@ public class BouquetSubmissionManager : MonoBehaviour
     {
         FlowerData[] bouquet = bouquetManager.GetBouquet();
 
-        // Get the current visit
         if (currentCharacter.visitNumber >= currentCharacter.visits.Count)
         {
             Debug.LogWarning("No more visits defined for this character.");
@@ -29,47 +28,33 @@ public class BouquetSubmissionManager : MonoBehaviour
 
         var currentVisit = currentCharacter.visits[currentCharacter.visitNumber];
 
-        // If no hidden requirements, automatically good
-        if (currentVisit.hiddenRequirements == null || currentVisit.hiddenRequirements.Count == 0)
-        {
-            goodBouquet = true;
-        }
-        else
-        {
-            goodBouquet = CheckRequirements(bouquet, currentVisit.hiddenRequirements);
-        }
+        // Check requirements
+        goodBouquet = (currentVisit.hiddenRequirements == null || currentVisit.hiddenRequirements.Count == 0)
+            ? true
+            : CheckRequirements(bouquet, currentVisit.hiddenRequirements);
 
-        // Optional: check total coin cost
+        // Optional: budget
         if (checkCoinBudget && currentVisit.maxBudget > 0)
         {
             int totalCost = 0;
             foreach (FlowerData flower in bouquet)
-            {
-                if (flower != null)
-                    totalCost += flower.cost;
-            }
+                if (flower != null) totalCost += flower.cost;
 
-            if (totalCost > currentVisit.maxBudget)
-            {
-                goodBouquet = false; // Over budget → bad bouquet
-            }
+            if (totalCost > currentVisit.maxBudget) goodBouquet = false;
         }
 
         currentCharacter.satisfied = goodBouquet;
 
-        // 🔹 SWITCH PANELS BACK FIRST
         bouquetConstructPanel.SetActive(false);
         customerOrderPanel.SetActive(true);
 
-        // Show the appropriate dialogue
         dialogueManager.ShowResult(goodBouquet);
 
         HandleRevisitLogic();
     }
 
-    bool CheckRequirements(FlowerData[] bouquet, List<FlowerData> requirements)
+    private bool CheckRequirements(FlowerData[] bouquet, List<FlowerData> requirements)
     {
-        // Count bouquet flowers
         Dictionary<FlowerData, int> bouquetCounts = new Dictionary<FlowerData, int>();
         foreach (FlowerData f in bouquet)
         {
@@ -78,40 +63,20 @@ public class BouquetSubmissionManager : MonoBehaviour
             bouquetCounts[f]++;
         }
 
-        // Check each requirement (assume quantity = 1 for now, you can extend later)
         foreach (FlowerData req in requirements)
         {
-            if (!bouquetCounts.ContainsKey(req) || bouquetCounts[req] < 1)
-            {
-                return false;
-            }
+            if (!bouquetCounts.ContainsKey(req) || bouquetCounts[req] < 1) return false;
         }
 
         return true;
     }
 
-    void HandleRevisitLogic()
+    private void HandleRevisitLogic()
     {
+        // ALWAYS increment visit
         currentCharacter.visitNumber++;
 
-        if (currentCharacter.visitNumber >= currentCharacter.visits.Count)
-        {
-            currentCharacter.willRevisit = false;
-            return;
-        }
-
-        if (currentCharacter.visitNumber < currentCharacter.numberOfRequiredVisits)
-        {
-            currentCharacter.willRevisit = true;
-        }
-        else if (currentCharacter.visitNumber < currentCharacter.maxNumberOfVisits &&
-                 !currentCharacter.satisfied)
-        {
-            currentCharacter.willRevisit = true;
-        }
-        else
-        {
-            currentCharacter.willRevisit = false;
-        }
+        // Will revisit until maxNumberOfVisits is reached
+        currentCharacter.willRevisit = currentCharacter.visitNumber < currentCharacter.maxNumberOfVisits;
     }
 }

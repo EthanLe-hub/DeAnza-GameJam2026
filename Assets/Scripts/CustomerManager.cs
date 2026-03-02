@@ -25,123 +25,105 @@ public class CustomerManager : MonoBehaviour
 
     private CharacterData currentCustomer;
     private CustomerUIController currentCustomerUI;
-    //private bool isNarrativeCustomer = false;
 
     void Start()
     {
+        ResetAllNarrativeCustomers();
         SpawnCustomer();
+    }
+
+    private void ResetAllNarrativeCustomers()
+    {
+        CharacterData[] narratives = { narrativeCharacter1, narrativeCharacter2, narrativeCharacter3, narrativeCharacter4, narrativeCharacter5 };
+        foreach (var c in narratives)
+        {
+            if (c != null)
+            {
+                c.visitNumber = 0;
+                c.willRevisit = true;
+            }
+        }
     }
 
     public void SpawnCustomer()
     {
-        // Randomize narrative vs normal: 50% chance
-        bool pickNarrative = Random.value < 0.5f; 
-        
-        // Destroy old UI if it exists
         if (currentCustomerUI != null)
             Destroy(currentCustomerUI.gameObject);
+
+        bool pickNarrative = Random.value < 0.5f;
+
         if (pickNarrative)
-        {
-            Debug.Log("Spawning Narrative character!");
-            
-            int index = Random.Range(0, 5);
-            switch (index)
-            {
-                case 0: currentCustomer = narrativeCharacter1; break;
-                case 1: currentCustomer = narrativeCharacter2; break;
-                case 2: currentCustomer = narrativeCharacter3; break;
-                case 3: currentCustomer = narrativeCharacter4; break;
-                case 4: currentCustomer = narrativeCharacter5; break;
-            }
-            // Make sure narrative character has valid data
-            if (currentCustomer == null)
-            {
-                Debug.LogError($"Narrative character at index {index} is null!");
-                return;
-            }
-            SetupNarrativeCustomer();
-        }
+            SpawnNarrativeCustomer();
         else
-        {
-            Debug.Log("Spawning Normal character!");
-            
-            // First spawn the random normal customer data
-            normalCustomerSpawner.SpawnRandomNormalCustomer();
-            
-            // Then use that data
-            currentCustomer = normalCustomerSpawner.genericNormalCustomer;
-            
-            if (currentCustomer == null)
-            {
-                Debug.LogError("Failed to create normal customer!");
-                return;
-            }
-            
-            SetupNormalCustomer();
-        }
+            SpawnNormalCustomer();
     }
 
     #region Narrative Customer Setup
-    void SetupNarrativeCustomer()
+    private void SpawnNarrativeCustomer()
     {
-        customerOrderPanel.SetActive(true);
-        bouquetConstructPanel.SetActive(false);
+        List<CharacterData> availableNarratives = new List<CharacterData>();
+        CharacterData[] narratives = { narrativeCharacter1, narrativeCharacter2, narrativeCharacter3, narrativeCharacter4, narrativeCharacter5 };
+        foreach (var c in narratives)
+            if (c != null && c.willRevisit)
+                availableNarratives.Add(c);
 
-        // Instantiate prefab dynamically
-        GameObject uiObj = Instantiate(customerUIPrefab, customerOrderPanel.transform);
-        // Set it to be after CashierTable but before CashierTable1
-        Transform cashierTable = customerOrderPanel.transform.Find("CashierTable");
-        int insertIndex = cashierTable.GetSiblingIndex() + 1;
+        if (availableNarratives.Count == 0)
+        {
+            Debug.Log("No available narrative characters. Spawning normal customer instead.");
+            SpawnNormalCustomer();
+            return;
+        }
 
-        uiObj.transform.SetSiblingIndex(insertIndex);
-
-        currentCustomerUI = uiObj.GetComponent<CustomerUIController>();
-
-        currentCustomerUI.SetCharacterSprite(currentCustomer.characterSprite); // Call function in CustomerUIController to dynamically set customer sprite based on CharacterData ScriptableObject. 
-        currentCustomerUI.dialogueText.text = "";
-
-        // Assign DialogueManager references
-        dialogueManager.currentCharacter = currentCustomer;
-        bouquetSubmissionManager.currentCharacter = currentCustomer;
-        dialogueManager.dialogueText = currentCustomerUI.dialogueText;
-        dialogueManager.optionAButton = currentCustomerUI.optionAButton;
-        dialogueManager.optionBButton = currentCustomerUI.optionBButton;
-        dialogueManager.optionCButton = currentCustomerUI.optionCButton;
-
-        if (dialogueManager.dialogueText == null)
-            Debug.LogError("Dialogue Text is null! Did you assign it in CustomerUIController?");
-
-        dialogueManager.OnDialogueComplete = ShowBouquetPanel;
-        dialogueManager.OnResultComplete = SpawnCustomer;
-        dialogueManager.StartVisit();
+        int index = Random.Range(0, availableNarratives.Count);
+        currentCustomer = Instantiate(availableNarratives[index]);
+        SetupCustomerUI();
     }
     #endregion
 
     #region Normal Customer Setup
-    void SetupNormalCustomer()
+    private void SpawnNormalCustomer()
+    {
+        normalCustomerSpawner.SpawnRandomNormalCustomer();
+        if (normalCustomerSpawner.genericNormalCustomer == null)
+        {
+            Debug.LogError("Failed to create normal customer!");
+            return;
+        }
+
+        currentCustomer = Instantiate(normalCustomerSpawner.genericNormalCustomer);
+        SetupCustomerUI(isNormal: true);
+    }
+    #endregion
+
+    #region UI Setup
+    private void SetupCustomerUI(bool isNormal = false)
     {
         customerOrderPanel.SetActive(true);
         bouquetConstructPanel.SetActive(false);
 
-        // Instantiate prefab dynamically
         GameObject uiObj = Instantiate(customerUIPrefab, customerOrderPanel.transform);
-        // Set it to be after CashierTable but before CashierTable1
         Transform cashierTable = customerOrderPanel.transform.Find("CashierTable");
         int insertIndex = cashierTable.GetSiblingIndex() + 1;
-
         uiObj.transform.SetSiblingIndex(insertIndex);
 
         currentCustomerUI = uiObj.GetComponent<CustomerUIController>();
 
-        currentCustomerUI.SetCharacterSprite(currentCustomer.characterSprite); // Call function in CustomerUIController to dynamically set customer sprite based on CharacterData ScriptableObject. 
+        // Set sprite and clear dialogue
+        currentCustomerUI.SetCharacterSprite(currentCustomer.characterSprite);
         currentCustomerUI.dialogueText.text = "";
 
-        currentCustomerUI.optionAButton.gameObject.SetActive(false);
-        currentCustomerUI.optionBButton.gameObject.SetActive(false);
-
-        currentCustomerUI.optionCButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Bouquet";
+        // Clear button listeners
+        currentCustomerUI.optionAButton.onClick.RemoveAllListeners();
+        currentCustomerUI.optionBButton.onClick.RemoveAllListeners();
         currentCustomerUI.optionCButton.onClick.RemoveAllListeners();
-        currentCustomerUI.optionCButton.onClick.AddListener(() => ShowBouquetPanel());
+
+        if (isNormal)
+        {
+            currentCustomerUI.optionAButton.gameObject.SetActive(false);
+            currentCustomerUI.optionBButton.gameObject.SetActive(false);
+            currentCustomerUI.optionCButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start Bouquet";
+            currentCustomerUI.optionCButton.onClick.AddListener(() => ShowBouquetPanel());
+        }
 
         dialogueManager.currentCharacter = currentCustomer;
         bouquetSubmissionManager.currentCharacter = currentCustomer;
@@ -150,20 +132,17 @@ public class CustomerManager : MonoBehaviour
         dialogueManager.optionBButton = currentCustomerUI.optionBButton;
         dialogueManager.optionCButton = currentCustomerUI.optionCButton;
 
-        if (dialogueManager.dialogueText == null)
-            Debug.LogError("Dialogue Text is null! Did you assign it in CustomerUIController?");
-    
         dialogueManager.OnDialogueComplete = ShowBouquetPanel;
         dialogueManager.OnResultComplete = SpawnCustomer;
+
         dialogueManager.StartVisit();
     }
     #endregion
 
-    void ShowBouquetPanel()
+    private void ShowBouquetPanel()
     {
         customerOrderPanel.SetActive(false);
         bouquetConstructPanel.SetActive(true);
-
         bouquetManager.ClearBouquet();
     }
 }

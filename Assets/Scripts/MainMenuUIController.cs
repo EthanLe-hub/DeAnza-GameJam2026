@@ -25,12 +25,20 @@ public class MainMenuController : MonoBehaviour
         mainMenuContainer = root.Q<VisualElement>("MainMenuContainer");
         playButton = root.Q<Button>("PlayButton");
 
-        // Intro
+        // Intro Exposition (add it to the list of panels to display)
         introContainer = root.Q<VisualElement>("IntroStorySequenceExposition");
 
         for (int i = 1; i <= 8; i++)
         {
             var panel = root.Q<VisualElement>($"IntroStorySequence{i}");
+            if (panel != null)
+                introPanels.Add(panel);
+        }
+
+        // Intro Shop 1–4 (add it to the list of panels to display)
+        for (int i = 1; i <= 4; i++)
+        {
+            var panel = root.Q<VisualElement>($"IntroSequenceShop{i}");
             if (panel != null)
                 introPanels.Add(panel);
         }

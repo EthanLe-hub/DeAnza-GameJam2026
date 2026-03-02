@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlowerData
   flowerName: Baby's Breath (White)
   color: White
-  sprite: {fileID: 0}
+  sprite: {fileID: -2685033354376212455, guid: feee136232149374b8470c91b9e30d9f, type: 3}
   cost: 5
   meaning: Innocence, innocent

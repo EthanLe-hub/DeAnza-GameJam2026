@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlowerData
   flowerName: Sunflower (Yellow)
   color: Yellow
-  sprite: {fileID: 0}
+  sprite: {fileID: -256329436847572505, guid: 66aa52e13cebd9c49b63f85d42a0068a, type: 3}
   cost: 15
   meaning: Loyalty, joyful, joy

@@ -9,6 +9,7 @@ using UnityEngine;
 public class CharacterData : ScriptableObject
 {
     public string characterName;
+    public Sprite characterSprite; // Assign customer sprite here via the Inspector. 
 
     public int maxNumberOfVisits;
     public int numberOfRequiredVisits;

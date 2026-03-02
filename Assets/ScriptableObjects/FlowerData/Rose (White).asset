@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlowerData
   flowerName: Rose (White)
   color: White
-  sprite: {fileID: -4147086527198339126, guid: 77ab2bce969518f4ebed7e896384cb00, type: 3}
+  sprite: {fileID: -7908355047577390069, guid: c9895c240743a5e4484d104f4839e03f, type: 3}
   cost: 6
   meaning: Remembrance

@@ -16,6 +16,7 @@ public class NormalCustomerSpawner : MonoBehaviour
     public class NormalCustomerData
     {
         public string customerName;
+        public Sprite customerSprite; 
         public List<string> dialogues; // The "normal" dialogue lines
         public List<FlowerRequirement> hiddenRequirements; // What flowers they want
     }

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlowerData
   flowerName: Tulip (Yellow)
   color: Yellow
-  sprite: {fileID: 0}
+  sprite: {fileID: 4013143060025624986, guid: 233d7deaba886844a9f84747aaa2f043, type: 3}
   cost: 6
   meaning: Joy, 'congratulations on your emotional growth'

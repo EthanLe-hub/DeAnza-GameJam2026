@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Lila
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
   characterName: Lila
+  characterSprite: {fileID: 1140678964973161228, guid: ce9a08be84768bc4cbbeb95e41f78298, type: 3}
   maxNumberOfVisits: 1
   numberOfRequiredVisits: 1
   visitNumber: 0

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlowerData
   flowerName: Tulip (Purple)
   color: Purple
-  sprite: {fileID: 0}
+  sprite: {fileID: 936136339547852253, guid: 6e255553969cf33458b56da1468e6e58, type: 3}
   cost: 10
   meaning: Elegant, elegance

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ivy
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
   characterName: Ivy
+  characterSprite: {fileID: -3214629705306122718, guid: 4f5ae22dc32c6b846be5d60fc580ab46, type: 3}
   maxNumberOfVisits: 2
   numberOfRequiredVisits: 1
   visitNumber: 0

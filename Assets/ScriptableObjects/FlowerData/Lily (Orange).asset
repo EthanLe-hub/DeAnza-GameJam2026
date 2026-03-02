@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlowerData
   flowerName: Lily (Orange)
   color: Orange
-  sprite: {fileID: 0}
+  sprite: {fileID: 2753370318855209958, guid: 8c6e93ba1c0be874aa4eaf416edd3582, type: 3}
   cost: 10
   meaning: Confidence, colors around that

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlowerData
   flowerName: Lavender (Purple)
   color: Purple
-  sprite: {fileID: 0}
+  sprite: {fileID: 8597265555138175851, guid: 1d0db6f554050174a9166e3bf130fe57, type: 3}
   cost: 8
   meaning: Purity

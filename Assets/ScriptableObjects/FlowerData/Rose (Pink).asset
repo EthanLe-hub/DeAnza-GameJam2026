@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlowerData
   flowerName: Rose (Pink)
   color: Pink
-  sprite: {fileID: 3897340488653738690, guid: 2893ddccab56a4a4e894b1d761f66358, type: 3}
+  sprite: {fileID: -6090893668083929218, guid: 37bd99ecca299b940a0f9fceffe8be93, type: 3}
   cost: 10
   meaning: Admiration, aren't too bold, softer color, cute

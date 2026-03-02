@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: James
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
   characterName: James
+  characterSprite: {fileID: 2896374389433648120, guid: 143ac01c3e5d9584ebb75387faaca5f4, type: 3}
   maxNumberOfVisits: 3
   numberOfRequiredVisits: 1
   visitNumber: 0

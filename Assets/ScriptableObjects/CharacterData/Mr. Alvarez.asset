@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Mr. Alvarez
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
   characterName: Mr. Alvarez
+  characterSprite: {fileID: 4891546572251856633, guid: 8b1cf059714b33145ae96559afcc26de, type: 3}
   maxNumberOfVisits: 2
   numberOfRequiredVisits: 2
   visitNumber: 0

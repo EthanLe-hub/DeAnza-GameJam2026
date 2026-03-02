@@ -87,8 +87,15 @@ public class CustomerManager : MonoBehaviour
 
         // Instantiate prefab dynamically
         GameObject uiObj = Instantiate(customerUIPrefab, customerOrderPanel.transform);
+        // Set it to be after CashierTable but before CashierTable1
+        Transform cashierTable = customerOrderPanel.transform.Find("CashierTable");
+        int insertIndex = cashierTable.GetSiblingIndex() + 1;
+
+        uiObj.transform.SetSiblingIndex(insertIndex);
+
         currentCustomerUI = uiObj.GetComponent<CustomerUIController>();
 
+        currentCustomerUI.SetCharacterSprite(currentCustomer.characterSprite); // Call function in CustomerUIController to dynamically set customer sprite based on CharacterData ScriptableObject. 
         currentCustomerUI.dialogueText.text = "";
 
         // Assign DialogueManager references
@@ -114,8 +121,15 @@ public class CustomerManager : MonoBehaviour
 
         // Instantiate prefab dynamically
         GameObject uiObj = Instantiate(customerUIPrefab, customerOrderPanel.transform);
+        // Set it to be after CashierTable but before CashierTable1
+        Transform cashierTable = customerOrderPanel.transform.Find("CashierTable");
+        int insertIndex = cashierTable.GetSiblingIndex() + 1;
+
+        uiObj.transform.SetSiblingIndex(insertIndex);
+
         currentCustomerUI = uiObj.GetComponent<CustomerUIController>();
 
+        currentCustomerUI.SetCharacterSprite(currentCustomer.characterSprite); // Call function in CustomerUIController to dynamically set customer sprite based on CharacterData ScriptableObject. 
         currentCustomerUI.dialogueText.text = "";
 
         currentCustomerUI.optionAButton.gameObject.SetActive(false);

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlowerData
   flowerName: Lily (White)
   color: White
-  sprite: {fileID: 0}
+  sprite: {fileID: 8347145233668638268, guid: 6f5fcb6ad2759a54aa0428b0a9dec249, type: 3}
   cost: 12
   meaning: Sympathy

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Noah
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
   characterName: Noah
+  characterSprite: {fileID: -4180616989223104487, guid: 012995b9f7a863442991bb961a1ec80c, type: 3}
   maxNumberOfVisits: 1
   numberOfRequiredVisits: 1
   visitNumber: 0

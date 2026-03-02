@@ -1,0 +1,4 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Open" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/UI%20Toolkit/GameUI/NormalEndingScenes/1.png?fileID=-855298285791758126&amp;guid=a158fced7e170cf4e9a398838ee80239&amp;type=3#1_0&quot;); display: none;"/>
+    <ui:VisualElement name="Close" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/UI%20Toolkit/GameUI/NormalEndingScenes/2.png?fileID=6937817954938267909&amp;guid=9d19e210da7148e49952acd4d274c5bb&amp;type=3#2_0&quot;); display: none;"/>
+</ui:UXML>

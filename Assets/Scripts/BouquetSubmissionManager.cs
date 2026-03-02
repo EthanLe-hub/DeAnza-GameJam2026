@@ -7,6 +7,10 @@ public class BouquetSubmissionManager : MonoBehaviour
     public CharacterData currentCharacter;
     public DialogueManager dialogueManager;
 
+    public GameObject customerOrderPanel;
+    public GameObject bouquetConstructPanel;
+    public CustomerManager customerManager;
+
     [Header("Optional: Budget Check")]
     public bool checkCoinBudget = false;
 
@@ -52,6 +56,10 @@ public class BouquetSubmissionManager : MonoBehaviour
         }
 
         currentCharacter.satisfied = goodBouquet;
+
+        // 🔹 SWITCH PANELS BACK FIRST
+        bouquetConstructPanel.SetActive(false);
+        customerOrderPanel.SetActive(true);
 
         // Show the appropriate dialogue
         dialogueManager.ShowResult(goodBouquet);

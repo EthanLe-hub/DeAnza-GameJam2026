@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
-public class MainMenuController : MonoBehaviour
+public class MainMenuUIController : MonoBehaviour
 {
+    [Header("UI Toolkit")]
     public UIDocument uiDocument;
-    public string gameplaySceneName = "CustomerOrderPanel"; // Change to your real scene name
+
+    [Header("Gameplay UI (uGUI)")]
+    public GameObject gameplayCanvas; // Assign your gameplay canvas root here
 
     private VisualElement mainMenuContainer;
     private Button playButton;
@@ -21,13 +23,17 @@ public class MainMenuController : MonoBehaviour
     {
         var root = uiDocument.rootVisualElement;
 
+        // Make sure gameplay UI is OFF at start
+        gameplayCanvas.SetActive(false);
+
         // Main Menu
         mainMenuContainer = root.Q<VisualElement>("MainMenuContainer");
         playButton = root.Q<Button>("PlayButton");
 
-        // Intro Exposition (add it to the list of panels to display)
+        // Intro Container
         introContainer = root.Q<VisualElement>("IntroStorySequenceExposition");
 
+        // Intro Story Panels (1–8)
         for (int i = 1; i <= 8; i++)
         {
             var panel = root.Q<VisualElement>($"IntroStorySequence{i}");
@@ -35,7 +41,7 @@ public class MainMenuController : MonoBehaviour
                 introPanels.Add(panel);
         }
 
-        // Intro Shop 1–4 (add it to the list of panels to display)
+        // Intro Shop Panels (1–4)
         for (int i = 1; i <= 4; i++)
         {
             var panel = root.Q<VisualElement>($"IntroSequenceShop{i}");
@@ -43,7 +49,7 @@ public class MainMenuController : MonoBehaviour
                 introPanels.Add(panel);
         }
 
-        // Ensure intro is hidden at start
+        // Hide intro at start
         introContainer.style.display = DisplayStyle.None;
 
         playButton.clicked += StartIntro;
@@ -72,7 +78,7 @@ public class MainMenuController : MonoBehaviour
 
     void ShowNextPanel()
     {
-        // Hide previous
+        // Hide previous panel
         if (currentIndex >= 0 && currentIndex < introPanels.Count)
         {
             introPanels[currentIndex].style.display = DisplayStyle.None;
@@ -93,7 +99,13 @@ public class MainMenuController : MonoBehaviour
     {
         introActive = false;
 
-        // Load your actual gameplay scene
-        SceneManager.LoadScene(gameplaySceneName);
+        // 🔥 Hide entire UI Toolkit document
+        uiDocument.rootVisualElement.style.display = DisplayStyle.None;
+
+        // OR completely disable the GameObject (even cleaner)
+        uiDocument.gameObject.SetActive(false);
+
+        // 🔥 Enable gameplay UI
+        gameplayCanvas.SetActive(true);
     }
 }

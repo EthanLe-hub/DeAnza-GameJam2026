@@ -19,6 +19,7 @@ public class DialogueManager : MonoBehaviour
     [HideInInspector] public Button optionCButton;
 
     public System.Action OnDialogueComplete; 
+    public System.Action OnResultComplete;
 
     private CharacterData.VisitDialogue currentVisit;
     private int[] optionTextIndices = new int[3]; // Track which text index we are on per button
@@ -202,6 +203,7 @@ public class DialogueManager : MonoBehaviour
                 else
                 {
                     optionCButton.gameObject.SetActive(false);
+                    OnResultComplete?.Invoke();
                 }
             });
         }

@@ -21,6 +21,7 @@ public class CustomerManager : MonoBehaviour
     public NormalCustomerSpawner normalCustomerSpawner;
     public DialogueManager dialogueManager;
     public BouquetManager bouquetManager;
+    public BouquetSubmissionManager bouquetSubmissionManager;
 
     private CharacterData currentCustomer;
     private CustomerUIController currentCustomerUI;
@@ -100,6 +101,7 @@ public class CustomerManager : MonoBehaviour
 
         // Assign DialogueManager references
         dialogueManager.currentCharacter = currentCustomer;
+        bouquetSubmissionManager.currentCharacter = currentCustomer;
         dialogueManager.dialogueText = currentCustomerUI.dialogueText;
         dialogueManager.optionAButton = currentCustomerUI.optionAButton;
         dialogueManager.optionBButton = currentCustomerUI.optionBButton;
@@ -109,6 +111,7 @@ public class CustomerManager : MonoBehaviour
             Debug.LogError("Dialogue Text is null! Did you assign it in CustomerUIController?");
 
         dialogueManager.OnDialogueComplete = ShowBouquetPanel;
+        dialogueManager.OnResultComplete = SpawnCustomer;
         dialogueManager.StartVisit();
     }
     #endregion
@@ -140,6 +143,7 @@ public class CustomerManager : MonoBehaviour
         currentCustomerUI.optionCButton.onClick.AddListener(() => ShowBouquetPanel());
 
         dialogueManager.currentCharacter = currentCustomer;
+        bouquetSubmissionManager.currentCharacter = currentCustomer;
         dialogueManager.dialogueText = currentCustomerUI.dialogueText;
         dialogueManager.optionAButton = currentCustomerUI.optionAButton;
         dialogueManager.optionBButton = currentCustomerUI.optionBButton;
@@ -149,6 +153,7 @@ public class CustomerManager : MonoBehaviour
             Debug.LogError("Dialogue Text is null! Did you assign it in CustomerUIController?");
     
         dialogueManager.OnDialogueComplete = ShowBouquetPanel;
+        dialogueManager.OnResultComplete = SpawnCustomer;
         dialogueManager.StartVisit();
     }
     #endregion

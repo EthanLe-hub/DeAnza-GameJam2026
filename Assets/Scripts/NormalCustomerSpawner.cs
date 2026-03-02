@@ -1,6 +1,7 @@
 // Ethan Le (2/28/2026): 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /**
  * Dynamically spawns a normal customer and assigns their dialogue + requirements.
@@ -12,6 +13,9 @@ public class NormalCustomerSpawner : MonoBehaviour
     public BouquetManager bouquetManager;
     public DialogueManager dialogueManager;
 
+    public GameObject currentCustomerUI; // The UI GameObject displaying the customer.
+    public Image customerImage;          // The Image component in the UI for the sprite.
+    
     [System.Serializable]
     public class NormalCustomerData
     {
@@ -41,47 +45,43 @@ public class NormalCustomerSpawner : MonoBehaviour
     public void SpawnRandomNormalCustomer()
     {
         if (normalCustomers.Count == 0)
-    {
-        Debug.LogWarning("No normal customers defined!");
-        return;
-    }
-    // Pick a random normal customer
-    int index = Random.Range(0, normalCustomers.Count);
-    NormalCustomerData selected = normalCustomers[index];
-    // Assign the generic CharacterData for this spawn
-    genericNormalCustomer.characterName = selected.customerName;
-    genericNormalCustomer.maxNumberOfVisits = 1;
-    genericNormalCustomer.numberOfRequiredVisits = 1;
-    genericNormalCustomer.visitNumber = 0;
-    genericNormalCustomer.satisfied = false;
-    genericNormalCustomer.willRevisit = false;
-    // Create a single visit dynamically
-    CharacterData.VisitDialogue visit = new CharacterData.VisitDialogue();
-    visit.intro = selected.dialogues;
-    visit.optionA = new List<string>();
-    visit.optionB = new List<string>();
-    visit.optionC = new List<string>();
-    visit.goodResult = new List<string>() { "Thank you! This is perfect." };
-    visit.badResult = new List<string>() { "Hmm… this isn't quite right." };
-    // Assign hidden requirements with quantities
-    visit.hiddenRequirements = new List<FlowerData>();
-    foreach (var req in selected.hiddenRequirements)
-    {
-        for (int i = 0; i < req.quantity; i++)
         {
-            visit.hiddenRequirements.Add(req.flower);
+            Debug.LogWarning("No normal customers defined!");
+            return;
         }
-    }
-    // Overwrite visits
-    genericNormalCustomer.visits = new List<CharacterData.VisitDialogue>() { visit };
-    // REMOVE THESE LINES - Let CustomerManager handle dialogue setup
-    // dialogueManager.currentCharacter = genericNormalCustomer;
-    // dialogueManager.StartVisit();
-    }
 
-    /*** Example Setup ***/
-    // You can define normal customers in the inspector:
-    // normalCustomers[0].customerName = "Customer A"
-    // normalCustomers[0].dialogues = [ "Just a Red Rose, please.", "Thanks!" ]
-    // normalCustomers[0].hiddenRequirements = [ FlowerRequirement { flower = RedRose, quantity=1 } ]
+        // Pick a random normal customer
+        int index = Random.Range(0, normalCustomers.Count);
+        NormalCustomerData selected = normalCustomers[index];
+
+        // Assign generic CharacterData for dialogue + bouquet
+        genericNormalCustomer.characterName = selected.customerName;
+        genericNormalCustomer.characterSprite = selected.customerSprite; // <-- ADD THIS
+        genericNormalCustomer.maxNumberOfVisits = 1;
+        genericNormalCustomer.numberOfRequiredVisits = 1;
+        genericNormalCustomer.visitNumber = 0;
+        genericNormalCustomer.satisfied = false;
+        genericNormalCustomer.willRevisit = false;
+
+        // Create a single visit dynamically
+        CharacterData.VisitDialogue visit = new CharacterData.VisitDialogue();
+        visit.intro = selected.dialogues;
+        visit.optionA = new List<string>();
+        visit.optionB = new List<string>();
+        visit.optionC = new List<string>();
+        visit.goodResult = new List<string>() { "Thank you! This is perfect." };
+        visit.badResult = new List<string>() { "Hmm… this isn't quite right." };
+
+        // Assign hidden requirements
+        visit.hiddenRequirements = new List<FlowerData>();
+        foreach (var req in selected.hiddenRequirements)
+        {
+            for (int i = 0; i < req.quantity; i++)
+            {
+                visit.hiddenRequirements.Add(req.flower);
+            }
+        }
+
+        genericNormalCustomer.visits = new List<CharacterData.VisitDialogue>() { visit };
+    }
 }

@@ -4614,6 +4614,8 @@ MonoBehaviour:
   genericNormalCustomer: {fileID: 11400000, guid: ffcbb194a6f43504f87933a9d54a0aff, type: 2}
   bouquetManager: {fileID: 1309809384}
   dialogueManager: {fileID: 628868336}
+  currentCustomerUI: {fileID: 1176998833946445333, guid: a03a6f52255a0fb4d9044dee1e6e90e9, type: 3}
+  customerImage: {fileID: 0}
   normalCustomers:
   - customerName: Tom
     customerSprite: {fileID: -5736891267247292957, guid: 49663dd5fca3a4747ab9d18aa2417626, type: 3}

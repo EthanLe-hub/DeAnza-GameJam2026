@@ -49,13 +49,13 @@ Flower Meanings:
 
 Game created by: 
 
-    Kaitlyn Nguyen 
+    Kaitlyn Nguyen - project manager, UI and art concept and design
 
-    Ethan Le
+    Ethan Le - programmer, backend systems, UI implementation 
 
-    Vy Truong
+    Vy Truong - writer, artist 
 
-    Tia Nguyen
+    Tia Nguyen - art designer 
 
 
 Other Credits:

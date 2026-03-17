@@ -57,11 +57,10 @@ Game created by:
 
     Tia Nguyen - art designer 
 
+itch.io Game Website: https://ethanle-hub.itch.io/flowers-weeds 
 
 Other Credits:
 
 Music Track: Sunflower by Lukerembo
 
 Source: https://freetouse.com/music
-
-itch.io Website: 
